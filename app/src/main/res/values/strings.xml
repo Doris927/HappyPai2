@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">HappyPai</string>
+
+    <string name="title_activity_test">TestActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_camera">CameraActivity</string>
+    <string name="takephoto">take a photo</string>
+    <string name="success">success</string>
+</resources>

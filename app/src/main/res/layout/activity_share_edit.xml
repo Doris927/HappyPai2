@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.tammy.happypai2.ShareEditActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/share_edit_toolbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:background="@drawable/border2"
+        android:padding="10dp"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/advertise_img1"
+            android:scaleType="center"
+            android:layout_weight="1"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.5"
+            android:gravity="top"
+            android:background="@null"
+            android:hint="Please enter something."/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/border2">
+        <!-- 上圆角-->
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_location_gary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="現在地"/>
+        </LinearLayout>
+
+        <!-- 分割线 -->
+        <View style="@style/bg_line"/>
+        <!-- 无圆角-->
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_location_gary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="現在地"/>
+        </LinearLayout>
+
+        <View style="@style/bg_line"/>
+
+        <!-- 下圆角-->
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_location_gary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="現在地"/>
+        </LinearLayout>
+
+        <View style="@style/bg_line"/>
+
+        <!-- 下圆角-->
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_location_gary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="現在地"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

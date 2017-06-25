@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/gray_bg"
+    tools:context="com.example.tammy.happypai2.MainActivity" >
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/title"
+        android:layout_marginRight="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="22dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/imageView"
+        android:layout_toStartOf="@+id/imageView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="93dp"
+        android:layout_marginRight="93dp"
+        android:src="@drawable/titile_heart"
+        android:layout_above="@+id/viewpager"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="18dp" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="wrap_content"
+        android:layout_height="380dp"
+        android:layout_gravity="center"
+        android:layout_below="@+id/imageView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>

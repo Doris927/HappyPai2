@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/home_icon_ask"
+        android:id="@+id/album_item_image"/>
+
+    <ImageButton
+        android:id="@+id/album_item_select"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/check_a"/>
+
+</RelativeLayout>
