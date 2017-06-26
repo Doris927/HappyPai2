@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -26,6 +27,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
+
+import com.example.tammy.happypai2.util.ImageLoader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -47,6 +50,8 @@ public class AskActivity extends AppCompatActivity implements View.OnClickListen
 
     ImageButton bt_capture;
     ImageView iv_refer;
+
+    ImageLoader imageLoader;
 
 
     private Camera.PictureCallback mPictureCallback = new Camera.PictureCallback() {
@@ -213,8 +218,17 @@ public class AskActivity extends AppCompatActivity implements View.OnClickListen
             Intent intent=new Intent();
             intent.setClass(this,AskPositionActivity.class);
             intent.putExtra("path", imagePath);
-            startActivity(intent);
+            Bundle bundle=new Bundle();
+            intent.putExtras(bundle);
+            startActivityForResult(intent, POSITION);
+//            startActivity(intent);
 
+        }else if(requestCode == POSITION && resultCode == Activity.RESULT_OK){
+            String path = data.getStringExtra("path");
+            Log.v("path",path);
+            //imageLoader.loadImage(path,iv_refer);
+            showImage(path);
+            Toast.makeText(this,path,Toast.LENGTH_SHORT).show();
         }
 
 

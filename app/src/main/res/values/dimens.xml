@@ -7,4 +7,8 @@
     <dimen name="tab_height">60dp</dimen>
     <dimen name="recent_image_size">30dp</dimen>
     <dimen name="effect_button_height">58dp</dimen>
+    <dimen name="register_tv_padding_left">55dp</dimen>
+    <dimen name="register_tv_padding_right">5dp</dimen>
+
+    <dimen name="button_size">40dp</dimen>
 </resources>

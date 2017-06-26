@@ -3,7 +3,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray_bg"
     tools:context="com.example.tammy.happypai2.AskPositionActivity">
+
+    <LinearLayout
+        android:id="@+id/topBtLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+            <ImageButton
+                android:layout_margin="5dp"
+                android:id="@+id/bt_back"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/arrow_left"
+                android:background="@android:color/transparent"
+                android:layout_gravity="left"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+            <ImageButton
+                android:id="@+id/bt_sure"
+                android:layout_width="35dp"
+                android:layout_gravity="right"
+                android:scaleType="fitXY"
+                android:layout_height="35dp"
+                android:src="@drawable/button_sure"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <!-- 使用自定义组件 -->
     <com.example.tammy.happypai2.util.DrawView
@@ -11,6 +54,9 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
         />
+
 
 </LinearLayout>

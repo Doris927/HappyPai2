@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black_bg"
     android:orientation="vertical"
-    tools:context="com.example.tammy.happypai2.EffectActivity">
+    tools:context="com.example.tammy.happypai2.effect.EffectActivity">
 
     <LinearLayout
         android:id="@+id/topBtLayout"
@@ -52,6 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
+            android:id="@+id/iv_effect_pic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/bottomBtLayout"
@@ -66,6 +67,7 @@
             android:layout_alignParentBottom="true"
             android:background="@color/gray_bg">
             <Button
+                android:id="@+id/bt_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/effect_button_height"
                 android:drawableTop="@drawable/button_edit_a"
@@ -74,6 +76,7 @@
                 android:background="@android:color/transparent"
                 />
             <Button
+                android:id="@+id/bt_strengthen"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/effect_button_height"
                 android:drawableTop="@drawable/button_change_a"
@@ -82,6 +85,7 @@
                 android:background="@android:color/transparent"
                 />
             <Button
+                android:id="@+id/bt_effect"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/effect_button_height"
                 android:drawableTop="@drawable/button_effect2_a"
@@ -90,6 +94,7 @@
                 android:background="@android:color/transparent"
                 />
             <Button
+                android:id="@+id/bt_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/effect_button_height"
                 android:drawableTop="@drawable/button_clear_a"
