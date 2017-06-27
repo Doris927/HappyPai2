@@ -1,4 +1,4 @@
-package com.example.tammy.happypai2;
+package com.example.tammy.happypai2.share;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.example.tammy.happypai2.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

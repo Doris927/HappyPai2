@@ -1,4 +1,4 @@
-package com.example.tammy.happypai2;
+package com.example.tammy.happypai2.share;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,10 +10,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tammy.happypai2.R;
 import com.example.tammy.happypai2.bean.RegisterBean;
 import com.hdl.myhttputils.MyHttpUtils;
 import com.hdl.myhttputils.bean.CommCallback;
-import com.hdl.myhttputils.bean.StringCallBack;
 import com.hdl.myhttputils.utils.FailedMsgUtils;
 
 import java.util.HashMap;

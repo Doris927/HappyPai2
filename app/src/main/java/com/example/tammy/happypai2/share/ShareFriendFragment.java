@@ -1,4 +1,4 @@
-package com.example.tammy.happypai2;
+package com.example.tammy.happypai2.share;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TabHost;
+
+import com.example.tammy.happypai2.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

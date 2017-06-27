@@ -1,4 +1,4 @@
-package com.example.tammy.happypai2;
+package com.example.tammy.happypai2.share;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.tammy.happypai2.R;
 
 import java.util.List;
 import java.util.Map;

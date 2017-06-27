@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.tammy.happypai2.effect.EffectActivity;
+import com.example.tammy.happypai2.share.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,6 +148,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.button_cm2:
                 Log.v("button_test","button_cm2");
+                startActivity(new Intent(this,TestActivity.class));
                 break;
             case R.id.button_help:
                 Log.v("button_test","button_help");

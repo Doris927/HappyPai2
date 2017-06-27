@@ -1,17 +1,27 @@
-package com.example.tammy.happypai2;
+package com.example.tammy.happypai2.share;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.example.tammy.happypai2.R;
+import com.example.tammy.happypai2.effect.EditActivity;
+import com.example.tammy.happypai2.effect.EffectActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +48,7 @@ public class ShareMainActivity extends AppCompatActivity implements View.OnClick
     private ImageButton mImgProfile;
     private ImageButton mSend;
 
+    private static final int IMAGE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,7 +165,12 @@ public class ShareMainActivity extends AppCompatActivity implements View.OnClick
                 selectTab(3);
                 break;
             case R.id.button_send:
-                startActivity(new Intent(this,ShareEditActivity.class));
+                Log.v("button_test","button_effect");
+                Toast.makeText(this, "choose a photo", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, IMAGE);
+//                startActivity(new Intent(this,ShareEditActivity.class));
                 break;
         }
     }
@@ -185,6 +201,32 @@ public class ShareMainActivity extends AppCompatActivity implements View.OnClick
         mImgFriend.setImageResource(R.drawable.tab_recent_a);
         mImgSearch.setImageResource(R.drawable.tab_search_a);
         mImgProfile.setImageResource(R.drawable.tab_profile_a);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //获取图片路径
+        if (requestCode == IMAGE && resultCode == Activity.RESULT_OK && data != null) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumns = {MediaStore.Images.Media.DATA};
+            Cursor c = getContentResolver().query(selectedImage, filePathColumns, null, null, null);
+            c.moveToFirst();
+            int columnIndex = c.getColumnIndex(filePathColumns[0]);
+            String imagePath = c.getString(columnIndex);
+//            showImage(imagePath);
+            c.close();
+
+
+            Intent intent=new Intent();
+            intent.setClass(this,ShareEditActivity.class);
+            intent.putExtra("path", imagePath);
+            startActivity(intent);
+
+        }
+
+
     }
 
 

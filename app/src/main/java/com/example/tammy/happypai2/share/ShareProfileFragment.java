@@ -1,4 +1,4 @@
-package com.example.tammy.happypai2;
+package com.example.tammy.happypai2.share;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.tammy.happypai2.util.NoScrollListView;
+import com.example.tammy.happypai2.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

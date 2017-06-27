@@ -212,14 +212,14 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <com.example.tammy.happypai.NoScrollListView
+            <com.example.tammy.happypai2.util.NoScrollListView
                 android:id="@+id/share_search_lv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@color/gray_bg"
                 android:dividerHeight="15dp">
 
-            </com.example.tammy.happypai.NoScrollListView>
+            </com.example.tammy.happypai2.util.NoScrollListView>
         </LinearLayout>
     </ScrollView>
 
