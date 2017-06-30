@@ -28,6 +28,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private ViewPager viewPager;  //对应的viewPager
 
     private static final int IMAGE = 1;
+    private static final int IMAGE2 =2;
 
 
     private List<View> viewList;//view数组
@@ -152,6 +153,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.button_help:
                 Log.v("button_test","button_help");
+                Log.v("button_test","button_effect");
+                Toast.makeText(this, "choose a photo", Toast.LENGTH_LONG).show();
+                Intent intent2 = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent2, IMAGE2);
                 break;
             default:
                 break;
@@ -177,6 +183,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
             intent.putExtra("path", imagePath);
             startActivity(intent);
 
+        }else if (requestCode == IMAGE2 && resultCode == Activity.RESULT_OK && data != null){
+            Uri selectedImage = data.getData();
+            String[] filePathColumns = {MediaStore.Images.Media.DATA};
+            Cursor c = getContentResolver().query(selectedImage, filePathColumns, null, null, null);
+            c.moveToFirst();
+            int columnIndex = c.getColumnIndex(filePathColumns[0]);
+            String imagePath = c.getString(columnIndex);
+//            showImage(imagePath);
+            c.close();
+
+            Intent intent=new Intent();
+            intent.setClass(this,Test2Activity.class);
+            intent.putExtra("path", imagePath);
+            startActivity(intent);
         }
 
 
