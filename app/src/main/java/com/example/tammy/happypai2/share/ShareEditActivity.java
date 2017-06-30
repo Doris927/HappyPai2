@@ -46,8 +46,18 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ShareEditActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -62,6 +72,7 @@ public class ShareEditActivity extends AppCompatActivity implements View.OnClick
     private FusedLocationProviderClient mFusedLocationClient;
     protected Location mLastLocation;
     private AddressResultReceiver mResultReceiver;
+    ProgressDialog dialog = null;
 
     String user_id;
 
@@ -125,6 +136,7 @@ public class ShareEditActivity extends AppCompatActivity implements View.OnClick
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
+            Log.v("res", "permisiion denied");
             return;
         }
         mFusedLocationClient.getLastLocation()
@@ -267,8 +279,14 @@ public class ShareEditActivity extends AppCompatActivity implements View.OnClick
                         //Toast.makeText(RegisterActivity.this,registerBean.getUser_id()+"",Toast.LENGTH_SHORT).show();
 
                         if(shareBean.getState()==0){
-                            Toast.makeText(ShareEditActivity.this,shareBean.getImage(),Toast.LENGTH_SHORT).show();
-                            upload(shareBean.getImage());
+                            final String imageKey = shareBean.getImage();
+                            dialog = ProgressDialog.show(ShareEditActivity.this, "", "Uploading file...", true);
+                            new Thread(new Runnable() {
+                                public void run() {
+                                    uploadFile(imageKey, "http://52.41.31.68/myUploadFile.php");
+                                }
+                            }).start();
+
 
                         }else{
                             Toast.makeText(ShareEditActivity.this,shareBean.getMsg(),Toast.LENGTH_SHORT).show();
@@ -280,6 +298,129 @@ public class ShareEditActivity extends AppCompatActivity implements View.OnClick
                         Toast.makeText(ShareEditActivity.this, FailedMsgUtils.getErrMsgStr(throwable),Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+
+    public int uploadFile(String key, String upLoadServerUri) {
+        int serverResponseCode = 0;
+        String fileName = key;
+        Log.v("path", path);
+        HttpURLConnection conn = null;
+        DataOutputStream dos = null;
+        String lineEnd = "\r\n";
+        String twoHyphens = "--";
+        String boundary = "*****";
+        int bytesRead, bytesAvailable, bufferSize;
+        byte[] buffer;
+        int maxBufferSize = 1 * 1024 * 1024;
+        File sourceFile = new File(path);
+
+        if (!sourceFile.isFile()) {
+            Log.e("uploadFile", "Source File not exist");
+            dialog.dismiss();
+            return 0;
+        }
+        else
+        {
+            try {
+
+                // open a URL connection to the Servlet
+                FileInputStream fileInputStream = new FileInputStream(sourceFile);
+                URL url = new URL(upLoadServerUri);
+
+                // Open a HTTP  connection to  the URL
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setDoInput(true); // Allow Inputs
+                conn.setDoOutput(true); // Allow Outputs
+                conn.setUseCaches(false); // Don't use a Cached Copy
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Connection", "Keep-Alive");
+                conn.setRequestProperty("ENCTYPE", "multipart/form-data");
+                conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+                conn.setRequestProperty("uploaded_file", key);
+
+
+                dos = new DataOutputStream(conn.getOutputStream());
+
+                dos.writeBytes(twoHyphens + boundary + lineEnd);
+                dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename="+ key + "" + lineEnd);
+                dos.writeBytes(lineEnd);
+
+                // create a buffer of  maximum size
+                bytesAvailable = fileInputStream.available();
+
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                buffer = new byte[bufferSize];
+
+                // read file and write it into form...
+                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+                while (bytesRead > 0) {
+
+                    dos.write(buffer, 0, bufferSize);
+                    bytesAvailable = fileInputStream.available();
+                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                    bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+                }
+
+                // send multipart form data necesssary after file data...
+                dos.writeBytes(lineEnd);
+                dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+                // Responses from the server (code and message)
+                serverResponseCode = conn.getResponseCode();
+                String serverResponseMessage = conn.getResponseMessage();
+
+                Log.i("uploadFile", "HTTP Response is : "+ serverResponseMessage + ": " + serverResponseCode);
+
+                if(serverResponseCode == 200){
+
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(ShareEditActivity.this, "File Upload Complete.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+                //close the streams //
+                fileInputStream.close();
+                dos.flush();
+                dos.close();
+
+            } catch (MalformedURLException ex) {
+
+                ex.printStackTrace();
+
+                runOnUiThread(new Runnable() {
+                    public void run() {
+
+                        Toast.makeText(ShareEditActivity.this, "MalformedURLException",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                Log.e("Upload file to server", "error: " + ex.getMessage(), ex);
+            } catch (Exception e) {
+
+                e.printStackTrace();
+
+                runOnUiThread(new Runnable() {
+                    public void run() {
+
+                        Toast.makeText(ShareEditActivity.this, "Got Exception : see logcat ",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+                Log.e("server Exception", "Exception : " + e.getMessage(), e);
+            } finally {
+                dialog.dismiss();
+            }
+
+            return serverResponseCode;
+
+        } // End else block
     }
 
     private void upload(String key){
