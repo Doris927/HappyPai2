@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -47,6 +46,7 @@ public class AskActivity extends AppCompatActivity implements View.OnClickListen
 
     private static final int IMAGE = 1;
     private static final int POSITION=2;
+    //hahhahahhahahhah
 
     ImageButton bt_capture;
     ImageView iv_refer;
