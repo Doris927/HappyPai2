@@ -47,7 +47,7 @@ public class AskActivity extends AppCompatActivity implements View.OnClickListen
     private static final int IMAGE = 1;
     private static final int POSITION=2;
     //hahhahahhahahhah
-
+    //lallalallllal
     ImageButton bt_capture;
     ImageView iv_refer;
 
