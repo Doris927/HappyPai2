@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.tammy.happypai2.R;
+import com.example.tammy.happypai2.util.Util;
+import com.soundcloud.android.crop.Crop;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageGrayscaleFilter;
@@ -29,8 +35,13 @@ public class EffectActivity extends AppCompatActivity implements View.OnClickLis
     private GPUImage gpuImage;
 
     private String path;
+    private String pathTemp;
     private Bitmap bm;
     private Bitmap bm_effect;
+
+    private final int EDIT=0;
+    private final int STRENGTHEN=1;
+    private final int EFFECT=2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +52,16 @@ public class EffectActivity extends AppCompatActivity implements View.OnClickLis
         path=intent.getStringExtra("path");
         bm = BitmapFactory.decodeFile(path);
 
+        Matrix matrix = new Matrix();
+        matrix.setScale(0.4f, 0.4f);
+        bm_effect = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(),
+                bm.getHeight(), matrix, true);
+        String fileName = "temp_effect.png";
+        pathTemp = Util.saveImage(getApplicationContext(),bm_effect,fileName);
+
         initView();
 
-        imageView.setImageBitmap(bm);
+        imageView.setImageBitmap(bm_effect);
 
 
 
@@ -79,8 +97,8 @@ public class EffectActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.bt_edit:
                 Intent intent=new Intent();
                 intent.setClass(this,EditActivity.class);
-                intent.putExtra("path", path);
-                startActivity(intent);
+                intent.putExtra("path", pathTemp);
+                startActivityForResult(intent,EDIT);
                 break;
             case R.id.bt_strengthen:
                 break;
@@ -96,11 +114,20 @@ public class EffectActivity extends AppCompatActivity implements View.OnClickLis
     public void testGPUImage(){
         // 使用GPUImage处理图像
         gpuImage = new GPUImage(this);
-        gpuImage.setImage(bm);
+        gpuImage.setImage(bm_effect);
         gpuImage.setFilter(new GPUImageGrayscaleFilter());
         bm_effect = gpuImage.getBitmapWithFilterApplied();
         //显示处理后的图片
         imageView.setImageBitmap(bm_effect);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent result) {
+        if (requestCode == EDIT && resultCode == RESULT_OK) {
+            Log.v("test","test_edit");
+            bm_effect = BitmapFactory.decodeFile(pathTemp);
+            imageView.setImageBitmap(bm_effect);
+        }
     }
 
 

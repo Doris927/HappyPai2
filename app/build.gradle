@@ -35,5 +35,6 @@ dependencies {
     compile 'com.huangdali:myhttputils:2.1.5'
     compile 'com.google.android.gms:play-services-identity:11.0.1'
     compile 'com.google.android.gms:play-services-location:11.0.1'
+    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
     testCompile 'junit:junit:4.12'
 }

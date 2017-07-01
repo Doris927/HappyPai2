@@ -2,9 +2,12 @@ package com.example.tammy.happypai2;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -28,17 +31,38 @@ public class CameraActivity extends Activity implements View.OnClickListener,Sur
     private int mCurrentCameraId = 0; // 1是前置 0是后置
 
 
+    private boolean select = false;
+
+    private final int POSITION=1;
+
+
     private Camera.PictureCallback mPictureCallback = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-            File tempFile = new File("/sdcard/temp.png");
+
+            File tempFile =null;
+            if (select){
+                tempFile = new File("/sdcard/temp_ask.png");
+            }else {
+                tempFile = new File("/sdcard/temp.png");
+            }
+
             try {
+
                 FileOutputStream fos = new FileOutputStream(tempFile);
                 fos.write(data);
                 fos.close();
-                Intent intent = new Intent(CameraActivity.this, CameraResultActivity.class);
-                intent.putExtra("picPath",tempFile.getAbsolutePath());
-                startActivity(intent);
+
+                if (select){
+                    Intent intent = new Intent(CameraActivity.this, AskPositionActivity.class);
+                    intent.putExtra("select",true);
+                    intent.putExtra("path", tempFile.getAbsolutePath());
+                    startActivityForResult(intent,POSITION);
+                }else{
+                    Intent intent = new Intent(CameraActivity.this, CameraResultActivity.class);
+                    intent.putExtra("picPath", tempFile.getAbsolutePath());
+                    startActivity(intent);
+                }
 //                CameraActivity.this.finish();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -55,9 +79,12 @@ public class CameraActivity extends Activity implements View.OnClickListener,Sur
         initView();
 
 
+
         mHolder = mPreview.getHolder();
         mHolder.addCallback(this);
 
+        Intent intent=getIntent();
+        select= intent.getBooleanExtra("select",false);
 
 
     }
@@ -251,6 +278,20 @@ public class CameraActivity extends Activity implements View.OnClickListener,Sur
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
             mCamera.setParameters(parameters);
 //            flashBtn.setImageResource(R.drawable.camera_flash_off);
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //获取图片路径
+        if(requestCode == POSITION && resultCode == Activity.RESULT_OK){
+            String path = data.getStringExtra("path");
+            Intent intent = new Intent(CameraActivity.this, AskActivity.class);
+            intent.putExtra("path", path);
+            setResult(RESULT_OK,intent); //intent为A传来的带有Bundle的intent，当然也可以自己定义新的Bundle
+            finish();//此处一定要调用finish()方法
         }
     }
 }

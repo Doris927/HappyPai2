@@ -47,4 +47,24 @@ public class Util {
         context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
                 Uri.fromFile(new File(file.getPath()))));
     }
+
+    public static String saveImage(Context context, Bitmap bmp, String fileName){
+        // 首先保存图片
+        File appDir = new File(Environment.getExternalStorageDirectory(), "HappyPai");
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        File file = new File(appDir,fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file.getAbsolutePath();
+    }
 }

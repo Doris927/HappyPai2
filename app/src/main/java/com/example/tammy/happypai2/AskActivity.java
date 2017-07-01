@@ -46,6 +46,7 @@ public class AskActivity extends AppCompatActivity implements View.OnClickListen
 
     private static final int IMAGE = 1;
     private static final int POSITION=2;
+    private static final int CAPTURE =3;
     //hahhahahhahahhah
     //lallalallllal
     ImageButton bt_capture;
@@ -168,6 +169,12 @@ public class AskActivity extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "take a photo", Toast.LENGTH_LONG).show();
+
+                Intent intent=new Intent();
+                intent.setClass(context,CameraActivity.class);
+                intent.putExtra("select",true);
+                startActivityForResult(intent,POSITION);
+
                 popupWindow.dismiss();
             }
         });
@@ -179,6 +186,8 @@ public class AskActivity extends AppCompatActivity implements View.OnClickListen
                 Toast.makeText(context, "choose a photo", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(Intent.ACTION_PICK,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Bundle bundle=new Bundle();
+                intent.putExtras(bundle);
                 startActivityForResult(intent, IMAGE);
 
                 popupWindow.dismiss();
@@ -286,7 +295,7 @@ public class AskActivity extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onPause() {
         super.onPause();
-//        releaseCamera();
+        releaseCamera();
     }
 
     /**

@@ -78,6 +78,7 @@
             android:exported="false" />
 
         <activity android:name=".Test2Activity"></activity>
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -27,6 +28,7 @@ import android.widget.ImageButton;
 import com.example.tammy.happypai2.util.DrawView;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -43,6 +45,8 @@ public class AskPositionActivity extends AppCompatActivity {
     private ProgressDialog pd;
     /** Called when the activity is first created. */
 
+    private boolean select= false;
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,15 @@ public class AskPositionActivity extends AppCompatActivity {
         Intent intent=getIntent();
         final String path=intent.getStringExtra("path");
         Bitmap bm = BitmapFactory.decodeFile(path);
+
+        select = intent.getBooleanExtra("select",false);
+
+        if (select){
+            Matrix matrix = new Matrix();
+            matrix.setRotate(90);
+            bm = Bitmap.createBitmap(bm,0,0,bm.getWidth(),bm.getHeight(),matrix,true);
+        }
+
 
         drawView = (DrawView) findViewById(R.id.ask_person);
         ibt_back = (ImageButton)findViewById(R.id.bt_back);
@@ -216,10 +229,19 @@ public class AskPositionActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {// handler接收到消息后就会执行此方法
             pd.dismiss();// 关闭ProgressDialog
-            Intent intent = new Intent(AskPositionActivity.this, AskActivity.class);
-            intent.putExtra("path", filePath);
-            setResult(RESULT_OK,intent); //intent为A传来的带有Bundle的intent，当然也可以自己定义新的Bundle
-            finish();//此处一定要调用finish()方法
+
+            if (select){
+                Intent intent = new Intent(AskPositionActivity.this, CameraActivity.class);
+                intent.putExtra("path",filePath);
+                setResult(RESULT_OK,intent);
+                finish();
+            }else {
+                Intent intent = new Intent(AskPositionActivity.this, AskActivity.class);
+                intent.putExtra("path", filePath);
+                setResult(RESULT_OK,intent); //intent为A传来的带有Bundle的intent，当然也可以自己定义新的Bundle
+                finish();//此处一定要调用finish()方法
+            }
+
         }
     };
 
