@@ -10,7 +10,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import jp.co.cyberagent.android.gpuimage.GPUImage;
+import jp.co.cyberagent.android.gpuimage.GPUImageColorBlendFilter;
+import jp.co.cyberagent.android.gpuimage.GPUImageDissolveBlendFilter;
 import jp.co.cyberagent.android.gpuimage.GPUImageGrayscaleFilter;
+import jp.co.cyberagent.android.gpuimage.GPUImageSwirlFilter;
 
 public class Test2Activity extends AppCompatActivity {
 
@@ -39,14 +42,38 @@ public class Test2Activity extends AppCompatActivity {
 
     private void initView(){
         imageView = (ImageView) findViewById(R.id.iv_test_image);
-        bt_test = (Button)findViewById(R.id.bt_test);
+        bt_test = (Button)findViewById(R.id.bt_test01);
         bt_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 testGPUImage(1);
             }
         });
-// lalallalal
+
+        bt_test = (Button)findViewById(R.id.bt_test02);
+        bt_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testGPUImage(2);
+            }
+        });
+
+        bt_test = (Button)findViewById(R.id.bt_test03);
+        bt_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testGPUImage(3);
+            }
+        });
+
+        bt_test = (Button)findViewById(R.id.bt_test04);
+        bt_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testGPUImage(4);
+            }
+        });
+
 
 
     }
@@ -61,6 +88,13 @@ public class Test2Activity extends AppCompatActivity {
                 gpuImage.setFilter(new GPUImageGrayscaleFilter());
                 break;
             case 2:
+                gpuImage.setFilter(new GPUImageSwirlFilter());
+                break;
+            case 3:
+                gpuImage.setFilter(new GPUImageDissolveBlendFilter());
+                break;
+            case 4:
+                gpuImage.setFilter(new GPUImageColorBlendFilter());
                 break;
             default:break;
         }
