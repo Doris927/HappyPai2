@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.tammy.happypai2.CameraActivity;
+import com.example.tammy.happypai2.CameraResultActivity;
 import com.example.tammy.happypai2.R;
 import com.example.tammy.happypai2.util.Util;
 import com.soundcloud.android.crop.Crop;
@@ -92,7 +94,8 @@ public class EffectActivity extends AppCompatActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.bt_sure:
-                testGPUImage();
+                Util.saveImageToGallery(getApplicationContext(),bm_effect);
+                Util.dialog("info","Saved Successfully!",this,this);
                 break;
             case R.id.bt_edit:
                 Intent intent=new Intent();

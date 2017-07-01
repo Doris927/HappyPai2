@@ -82,10 +82,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.bt_sure:
-                String fileName = "temp_effect.png";
-                Util.saveImage(getApplicationContext(),bm,fileName);
-                Intent intent = new Intent(EditActivity.this, EffectActivity.class);
-                setResult(RESULT_OK,intent);
+                //保存图片
+                Util.saveImageToGallery(getApplicationContext(),bm);
                 finish();
                 break;
             default:break;

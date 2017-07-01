@@ -1,11 +1,14 @@
 package com.example.tammy.happypai2.util;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -66,5 +69,26 @@ public class Util {
             e.printStackTrace();
         }
         return file.getAbsolutePath();
+    }
+
+    /**
+     *
+     * @param title
+     * @param msg
+     * @param context
+     * @param activity
+     */
+    public static void dialog(String title, String msg, final Context context, final Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Saved successfully!");
+        builder.setTitle("Info");
+        builder.setPositiveButton("Sure", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                activity.finish();
+            }
+        });
+        builder.create().show();
     }
 }
