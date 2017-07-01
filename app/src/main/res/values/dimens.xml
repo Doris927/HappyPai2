@@ -11,4 +11,5 @@
     <dimen name="register_tv_padding_right">5dp</dimen>
 
     <dimen name="button_size">40dp</dimen>
+    <dimen name="effectImageButton">80dp</dimen>
 </resources>

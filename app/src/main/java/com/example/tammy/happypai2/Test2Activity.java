@@ -3,20 +3,25 @@ package com.example.tammy.happypai2;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import jp.co.cyberagent.android.gpuimage.GPUImage;
+import jp.co.cyberagent.android.gpuimage.GPUImageColorBlendFilter;
+import jp.co.cyberagent.android.gpuimage.GPUImageDissolveBlendFilter;
 import jp.co.cyberagent.android.gpuimage.GPUImageGrayscaleFilter;
+import jp.co.cyberagent.android.gpuimage.GPUImageSwirlFilter;
 
 public class Test2Activity extends AppCompatActivity {
 
     ImageView imageView;
-    Button bt_test;
+    ImageButton bt_test01;
+    ImageButton bt_test02;
+    ImageButton bt_test03;
+    ImageButton bt_test04;
 
     private GPUImage gpuImage;
 
@@ -40,12 +45,35 @@ public class Test2Activity extends AppCompatActivity {
 
     private void initView(){
         imageView = (ImageView) findViewById(R.id.iv_test_image);
-        bt_test = (Button)findViewById(R.id.bt_test);
-
-        bt_test.setOnClickListener(new View.OnClickListener() {
+        bt_test01 = (ImageButton)findViewById(R.id.bt_test01);
+        bt_test01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 testGPUImage(1);
+            }
+        });
+
+        bt_test02 = (ImageButton)findViewById(R.id.bt_test02);
+        bt_test02.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testGPUImage(2);
+            }
+        });
+
+        bt_test03 = (ImageButton)findViewById(R.id.bt_test03);
+        bt_test03.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testGPUImage(3);
+            }
+        });
+
+        bt_test04 = (ImageButton)findViewById(R.id.bt_test04);
+        bt_test04.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testGPUImage(4);
             }
         });
 
@@ -63,6 +91,13 @@ public class Test2Activity extends AppCompatActivity {
                 gpuImage.setFilter(new GPUImageGrayscaleFilter());
                 break;
             case 2:
+                gpuImage.setFilter(new GPUImageSwirlFilter());
+                break;
+            case 3:
+                gpuImage.setFilter(new GPUImageDissolveBlendFilter());
+                break;
+            case 4:
+                gpuImage.setFilter(new GPUImageColorBlendFilter());
                 break;
             default:break;
         }
