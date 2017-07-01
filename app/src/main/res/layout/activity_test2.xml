@@ -12,47 +12,87 @@
         android:id="@+id/iv_test_image"
         android:scaleType="fitCenter"
         android:layout_width="match_parent"
-        android:layout_height="460dp" />
+        android:layout_height="420dp" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
-        <Button
+        <!--<Button-->
+            <!--android:id="@+id/bt_test01"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:drawableTop="@drawable/button_edit_a"-->
+            <!--android:text="GrayScale"-->
+            <!--android:textColor="@color/my_yellow"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--/>-->
+
+
+        <!--<Button-->
+            <!--android:id="@+id/bt_test02"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:drawableTop="@drawable/button_edit_a"-->
+            <!--android:text="Swirl"-->
+            <!--android:textColor="@color/my_yellow"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--/>-->
+        <!--<Button-->
+            <!--android:id="@+id/bt_test03"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:drawableTop="@drawable/button_edit_a"-->
+            <!--android:text="Dissolve"-->
+            <!--android:textColor="@color/my_yellow"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--/>-->
+        <!--<Button-->
+            <!--android:id="@+id/bt_test04"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:drawableTop="@drawable/button_edit_a"-->
+            <!--android:text="Color"-->
+            <!--android:textColor="@color/my_yellow"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--/>-->
+        <ImageButton
+            android:layout_margin="5dp"
             android:id="@+id/bt_test01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/button_edit_a"
-            android:text="GrayScale"
-            android:textColor="@color/my_yellow"
+            android:layout_width="@dimen/effectImageButton"
+            android:layout_height="@dimen/effectImageButton"
+            android:scaleType="fitXY"
+            android:src="@drawable/grey"
             android:background="@android:color/transparent"
+            android:layout_marginLeft="15dp"
             />
-        <Button
+        <ImageButton
+            android:layout_margin="5dp"
             android:id="@+id/bt_test02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/button_edit_a"
-            android:text="Swirl"
-            android:textColor="@color/my_yellow"
+            android:layout_width="@dimen/effectImageButton"
+            android:layout_height="@dimen/effectImageButton"
+            android:scaleType="fitXY"
+            android:src="@drawable/swirl"
             android:background="@android:color/transparent"
             />
-        <Button
+        <ImageButton
+            android:layout_margin="5dp"
             android:id="@+id/bt_test03"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/button_edit_a"
-            android:text="Dissolve"
-            android:textColor="@color/my_yellow"
+            android:layout_width="@dimen/effectImageButton"
+            android:layout_height="@dimen/effectImageButton"
+            android:scaleType="fitXY"
+            android:src="@drawable/dissolve"
             android:background="@android:color/transparent"
             />
-        <Button
+        <ImageButton
+            android:layout_margin="5dp"
             android:id="@+id/bt_test04"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/button_edit_a"
-            android:text="Color"
-            android:textColor="@color/my_yellow"
+            android:layout_width="@dimen/effectImageButton"
+            android:layout_height="@dimen/effectImageButton"
+            android:scaleType="fitXY"
+            android:src="@drawable/colorblend"
             android:background="@android:color/transparent"
             />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
