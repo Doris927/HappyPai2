@@ -7,18 +7,35 @@
     android:orientation="vertical"
     tools:context="com.example.tammy.happypai2.CameraResultActivity">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Capture Result"
-        android:gravity="center"
-        android:textSize="30sp"/>
+        android:background="#e0000000"
+        android:padding="10dp"
+        android:id="@+id/topBtLayout">
+        <ImageButton
+            android:id="@+id/result_bt_cancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/arrow_left"
+            android:background="#00000000"
+            android:layout_alignParentLeft="true"/>
+        <ImageButton
+            android:id="@+id/result_bt_sure"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/button_sure"
+            android:background="#00000000"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
 
     <ImageView
-        android:id="@+id/picResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="center"/>
+        android:id="@+id/iv_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"/>
 
 
 
