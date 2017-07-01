@@ -1,4 +1,4 @@
-package com.example.tammy.happypai2;
+package com.example.tammy.happypai2.effect;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,19 +9,23 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.example.tammy.happypai2.R;
+import com.example.tammy.happypai2.util.Util;
+
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageColorBlendFilter;
 import jp.co.cyberagent.android.gpuimage.GPUImageDissolveBlendFilter;
 import jp.co.cyberagent.android.gpuimage.GPUImageGrayscaleFilter;
 import jp.co.cyberagent.android.gpuimage.GPUImageSwirlFilter;
 
-public class Test2Activity extends AppCompatActivity {
+public class EffectFilterActivity extends AppCompatActivity {
 
     ImageView imageView;
     ImageButton bt_test01;
     ImageButton bt_test02;
     ImageButton bt_test03;
     ImageButton bt_test04;
+    ImageButton bt_back, bt_sure;
 
     private GPUImage gpuImage;
 
@@ -74,6 +78,27 @@ public class Test2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 testGPUImage(4);
+            }
+        });
+
+        bt_back = (ImageButton)findViewById(R.id.bt_back);
+        bt_sure = (ImageButton)findViewById(R.id.bt_sure);
+
+        bt_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        bt_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String fileName = "temp_effect.png";
+                Util.saveImage(getApplicationContext(),bm_effect,fileName);
+                Intent intent = new Intent(EffectFilterActivity.this, EffectActivity.class);
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
 

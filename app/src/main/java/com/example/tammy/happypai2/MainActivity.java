@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.tammy.happypai2.effect.EffectActivity;
+import com.example.tammy.happypai2.effect.EffectFilterActivity;
 import com.example.tammy.happypai2.share.LoginActivity;
 
 import java.util.ArrayList;
@@ -194,7 +195,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             c.close();
 
             Intent intent=new Intent();
-            intent.setClass(this,Test2Activity.class);
+            intent.setClass(this,EffectFilterActivity.class);
             intent.putExtra("path", imagePath);
             startActivity(intent);
         }

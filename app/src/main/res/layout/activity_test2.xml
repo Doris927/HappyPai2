@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.tammy.happypai2.Test2Activity"
+    tools:context="com.example.tammy.happypai2.effect.EffectFilterActivity"
     android:background="@color/black_bg">
 
     <ImageView

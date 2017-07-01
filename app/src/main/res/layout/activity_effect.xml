@@ -51,13 +51,37 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
         <ImageView
             android:id="@+id/iv_effect_pic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/bottomBtLayout"
             android:scaleType="fitCenter"
-            android:src="@drawable/advertise_img3"/>
+            android:src="@drawable/advertise_img3"
+            android:visibility="visible"/>
+        <ImageView
+            android:id="@+id/iv_original_pic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottomBtLayout"
+            android:scaleType="fitCenter"
+            android:src="@drawable/advertise_img3"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/bt_compare"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="比較"
+
+            android:textColor="@android:color/white"
+            android:background="@drawable/round_button"/>
+
         <LinearLayout
             android:id="@id/bottomBtLayout"
             android:paddingTop="5dp"

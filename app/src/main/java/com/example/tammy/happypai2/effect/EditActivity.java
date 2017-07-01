@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.example.tammy.happypai2.AskActivity;
 import com.example.tammy.happypai2.AskPositionActivity;
 import com.example.tammy.happypai2.CameraActivity;
 import com.example.tammy.happypai2.R;
@@ -83,7 +84,10 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_sure:
                 //保存图片
-                Util.saveImageToGallery(getApplicationContext(),bm);
+                String fileName = "temp_effect.png";
+                Util.saveImage(getApplicationContext(),bm,fileName);
+                Intent intent = new Intent(EditActivity.this, EffectActivity.class);
+                setResult(RESULT_OK,intent);
                 finish();
                 break;
             default:break;
