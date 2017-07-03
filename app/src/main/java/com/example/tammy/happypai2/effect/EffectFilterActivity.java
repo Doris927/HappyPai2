@@ -13,10 +13,10 @@ import com.example.tammy.happypai2.R;
 import com.example.tammy.happypai2.util.Util;
 
 import jp.co.cyberagent.android.gpuimage.GPUImage;
-import jp.co.cyberagent.android.gpuimage.GPUImageColorBlendFilter;
-import jp.co.cyberagent.android.gpuimage.GPUImageDissolveBlendFilter;
+import jp.co.cyberagent.android.gpuimage.GPUImageEmbossFilter;
 import jp.co.cyberagent.android.gpuimage.GPUImageGrayscaleFilter;
-import jp.co.cyberagent.android.gpuimage.GPUImageSwirlFilter;
+import jp.co.cyberagent.android.gpuimage.GPUImageSepiaFilter;
+import jp.co.cyberagent.android.gpuimage.GPUImageSketchFilter;
 
 public class EffectFilterActivity extends AppCompatActivity {
 
@@ -115,14 +115,17 @@ public class EffectFilterActivity extends AppCompatActivity {
             case 1:
                 gpuImage.setFilter(new GPUImageGrayscaleFilter());
                 break;
+
             case 2:
-                gpuImage.setFilter(new GPUImageSwirlFilter());
+                gpuImage.setFilter(new GPUImageSepiaFilter());
                 break;
+
             case 3:
-                gpuImage.setFilter(new GPUImageDissolveBlendFilter());
+                gpuImage.setFilter(new GPUImageEmbossFilter());
                 break;
+
             case 4:
-                gpuImage.setFilter(new GPUImageColorBlendFilter());
+                gpuImage.setFilter(new GPUImageSketchFilter());
                 break;
             default:break;
         }

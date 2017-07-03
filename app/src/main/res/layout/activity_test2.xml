@@ -71,7 +71,7 @@
             android:layout_width="@dimen/effectImageButton"
             android:layout_height="@dimen/effectImageButton"
             android:scaleType="fitXY"
-            android:src="@drawable/swirl"
+            android:src="@drawable/brown"
             android:background="@android:color/transparent"
             />
         <ImageButton
@@ -80,7 +80,7 @@
             android:layout_width="@dimen/effectImageButton"
             android:layout_height="@dimen/effectImageButton"
             android:scaleType="fitXY"
-            android:src="@drawable/dissolve"
+            android:src="@drawable/emboss"
             android:background="@android:color/transparent"
             />
         <ImageButton
@@ -89,7 +89,7 @@
             android:layout_width="@dimen/effectImageButton"
             android:layout_height="@dimen/effectImageButton"
             android:scaleType="fitXY"
-            android:src="@drawable/colorblend"
+            android:src="@drawable/sketch"
             android:background="@android:color/transparent"
             />
 
