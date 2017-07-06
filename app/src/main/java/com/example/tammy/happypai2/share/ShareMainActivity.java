@@ -154,9 +154,13 @@ public class ShareMainActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()) {
             case R.id.tab_share_home:
                 selectTab(0);
+                ShareHomeFragment fgHome = (ShareHomeFragment)mFragments.get(0);
+                fgHome.refreshList();
                 break;
             case R.id.tab_share_search:
                 selectTab(1);
+                ShareSearchFragment fgSearch = (ShareSearchFragment)mFragments.get(1);
+                fgSearch.refreshList();
                 break;
             case R.id.tab_share_friend:
                 selectTab(2);

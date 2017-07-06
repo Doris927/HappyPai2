@@ -1,5 +1,7 @@
 package com.example.tammy.happypai2.share;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.tammy.happypai2.R;
+import com.example.tammy.happypai2.bean.PostBean;
+import com.hdl.myhttputils.MyHttpUtils;
+import com.hdl.myhttputils.bean.CommCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +27,7 @@ import java.util.Map;
 public class ShareHomeFragment extends Fragment {
         private ListView lv;
         private List<Map<String,Object>> data;
+        private ShareItemAdapter mAdapter;
 
 
         @Nullable
@@ -35,33 +41,66 @@ public class ShareHomeFragment extends Fragment {
         public void onActivityCreated(@Nullable Bundle savedInstanceState) {
                 super.onActivityCreated(savedInstanceState);
                 lv=(ListView)getView().findViewById(R.id.share_home_lv);
-                data=getdata();
-                ShareItemAdapter adapter=new ShareItemAdapter(getContext(),data);
-                lv.setAdapter(adapter);
-
+                getdata();
                 super.onActivityCreated(savedInstanceState);
         }
 
-        private List<Map<String,Object>> getdata()
+        public void refreshList(){
+                mAdapter.notifyDataSetChanged();
+        }
+
+        private void getdata()
         {
-                List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
-                for(int i=0;i<10;i++)
-                {
-                        Map<String,Object> map=new HashMap<String, Object>();
-                        map.put("img_icon", R.drawable.icon_user);
-                        map.put("username", "Tammy");
-                        map.put("time","2017/06/10 12:00");
-                        map.put("hasfollow",false);
-                        map.put("content", "contentcontentcontentcontentcontentcontent");
-                        map.put("img_content",R.drawable.advertise_img4);
-                        map.put("place","立命館大学");
-                        map.put("img_compose",R.drawable.button_effect_a);
-                        map.put("count_share","123");
-                        map.put("count_comment","123");
-                        map.put("count_thumb","123");
-                        list.add(map);
-                }
-                return list;
+                SharedPreferences sharedPreferences2 = getContext()
+                        .getSharedPreferences("user", Context.MODE_PRIVATE);
+                String user_id = sharedPreferences2.getString("user_id", "null");
+
+                Map<String, Object> params = new HashMap<>();//构造请求的参数
+                params.put("action", "fetch_person_share");
+                params.put("user_id",user_id);
+                params.put("post_num", 10);
+
+                MyHttpUtils.build()//构建myhttputils
+                        .url("http://52.41.31.68/api")//请求的url
+                        .addParams(params)
+                        .setJavaBean(PostBean.class)
+                        .onExecuteByPost(new CommCallback<PostBean>(){//开始执行，并有一个回调（异步的哦---->直接可以更新ui）
+                                @Override
+                                public void onSucceed(PostBean postBean) {//请求成功之后会调用这个方法----显示结果
+                                        //Toast.makeText(RegisterActivity.this,registerBean.getUser_id()+"",Toast.LENGTH_SHORT).show();
+                                        if(postBean.getState()==0){
+                                                List<PostBean.SharesBean> posts = postBean.getShares();
+                                                List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+                                                for(int i = 0;i < posts.size();i ++){
+                                                        Map<String,Object> map=new HashMap<String, Object>();
+                                                        map.put("user_id", posts.get(i).getUser_id());
+                                                        map.put("img_icon", R.drawable.icon_user);
+                                                        map.put("username", posts.get(i).getUser_name());
+                                                        map.put("time",posts.get(i).getTime_stamp());
+                                                        map.put("hasfollow",posts.get(i).getFollowee_id() != null);
+                                                        map.put("content", posts.get(i).getState_text());
+                                                        map.put("img_content",R.drawable.advertise_img4);
+                                                        map.put("place",posts.get(i).getLocation());
+                                                        map.put("img_compose",R.drawable.button_effect_a);
+                                                        map.put("count_share","123");
+                                                        map.put("count_comment","123");
+                                                        map.put("count_thumb","123");
+                                                        list.add(map);
+                                                }
+
+                                                ShareItemAdapter adapter=new ShareItemAdapter(getContext(),list);
+                                                mAdapter = adapter;
+                                                lv.setAdapter(adapter);
+                                        }else{
+
+                                        }
+
+                                }
+                                @Override
+                                public void onFailed(Throwable throwable) {//请求失败的时候会调用这个方法
+
+                                }
+                        });
         }
 
 }

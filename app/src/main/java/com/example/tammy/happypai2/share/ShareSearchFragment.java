@@ -41,6 +41,7 @@ public class ShareSearchFragment extends Fragment {
     private List<ImageView> images;
     private List<View> dots;
     private int currentItem;
+    private ShareItemAdapter mAdapter;
     //记录上一次点的位置
     private int oldPosition = 0;
     //存放图片的id
@@ -215,6 +216,10 @@ public class ShareSearchFragment extends Fragment {
         }
     }
 
+    public void refreshList(){
+        mAdapter.notifyDataSetChanged();
+    }
+
     /**
      * 获得数据
      * @return
@@ -260,6 +265,7 @@ public class ShareSearchFragment extends Fragment {
 
                             ShareItemAdapter adapter=new ShareItemAdapter(getContext(),list);
                             lv.setAdapter(adapter);
+                            mAdapter = adapter;
                         }else{
 
                         }

@@ -20,8 +20,10 @@ import com.hdl.myhttputils.bean.CommCallback;
 import com.hdl.myhttputils.utils.FailedMsgUtils;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by tammy on 17/6/12.
@@ -46,6 +48,7 @@ public class ShareItemAdapter extends BaseAdapter {
     private LayoutInflater mInflater=null;
     private List<Map<String,Object>> data;
     private Context context;
+    static private Set<String> isFollow;
 
 
     public ShareItemAdapter(Context context,List<Map<String,Object>> data) {
@@ -53,6 +56,12 @@ public class ShareItemAdapter extends BaseAdapter {
         this.mInflater=LayoutInflater.from(context);  //这里就是确定你listview在哪一个layout里面展示
         this.data = data;
         this.context = context;
+        this.isFollow = new HashSet<>();
+        for(int i = 0;i < data.size();i ++){
+            if((Boolean) data.get(i).get("hasfollow") == true){
+                this.isFollow.add((String)data.get(i).get("user_id"));
+            }
+        }
     }
 
     @Override
@@ -124,7 +133,16 @@ public class ShareItemAdapter extends BaseAdapter {
         holder.img_icon.setBackgroundResource((Integer)data.get(position).get("img_icon"));
         holder.tv_username.setText((String)data.get(position).get("username"));
         holder.tv_time.setText((String)data.get(position).get("time"));
-        if((Boolean)data.get(position).get("hasfollow")==true){
+        /*if((Boolean)data.get(position).get("hasfollow")==true){
+            holder.bt_follow.setText("Unfollow");
+            holder.bt_follow.setTag(0);
+        }
+        else{
+            holder.bt_follow.setText("Follow");
+            holder.bt_follow.setTag(1);
+        }*/
+
+        if(isFollow.contains((String)data.get(position).get("user_id"))){
             holder.bt_follow.setText("Unfollow");
             holder.bt_follow.setTag(0);
         }
@@ -132,7 +150,7 @@ public class ShareItemAdapter extends BaseAdapter {
             holder.bt_follow.setText("Follow");
             holder.bt_follow.setTag(1);
         }
-        Log.v("hs", (Boolean)data.get(position).get("hasfollow") + "");
+
         holder.bt_follow.setOnClickListener(new View.OnClickListener(){
             private Button followBtn;
 
@@ -142,12 +160,19 @@ public class ShareItemAdapter extends BaseAdapter {
                         .getSharedPreferences("user", Context.MODE_PRIVATE);
                 String user_id = sharedPreferences2.getString("user_id", "null");
                 final String followee = data.get(position).get("user_id") + "";
+                followBtn = (Button)view;
 
                 Map<String, Object> params = new HashMap<>();//构造请求的参数
-                params.put("action", "follow");
+                if((int)followBtn.getTag() == 0){
+                    params.put("action", "unFollow");
+                }
+                else{
+                    params.put("action", "follow");
+                }
+
                 params.put("follower_id",user_id);
                 params.put("followee_id", followee);
-                followBtn = (Button)view;
+
 
                 MyHttpUtils.build()//构建myhttputils
                         .url("http://52.41.31.68/api")//请求的url
@@ -158,7 +183,17 @@ public class ShareItemAdapter extends BaseAdapter {
                             public void onSucceed(ShareBean shareBean) {//请求成功之后会调用这个方法----显示结果
                                 //Toast.makeText(RegisterActivity.this,registerBean.getUser_id()+"",Toast.LENGTH_SHORT).show();
                                 if(shareBean.getState()==0){
-                                    followBtn.setText("Unfollow");
+                                    if((int)followBtn.getTag() == 0) {
+                                        followBtn.setText("follow");
+                                        followBtn.setTag(1);
+                                        isFollow.remove(followee);
+                                    }
+                                    else{
+                                        followBtn.setText("Unfollow");
+                                        followBtn.setTag(0);
+                                        isFollow.add(followee);
+                                    }
+                                    notifyDataSetChanged();
                                 }else{
 
                                 }
