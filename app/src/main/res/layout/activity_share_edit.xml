@@ -55,7 +55,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_location_gary"/>
+                android:src="@drawable/button_edit_location"/>
             <TextView
                 android:id="@+id/tv_location"
                 android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_location_gary"/>
+                android:src="@drawable/button_ask_composition"/>
             <TextView
                 android:id="@+id/tv_structure"
                 android:layout_width="wrap_content"
@@ -97,13 +97,23 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_location_gary"/>
+                android:src="@drawable/button_edit_authority"/>
             <TextView
                 android:id="@+id/tv_privacy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="権限"/>
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_weight="1"
+                android:paddingLeft="220dp"
+                android:paddingRight="15dp"
+                android:textOff="非公開"
+                android:textOn="公開" />
         </LinearLayout>
 
         <View style="@style/bg_line"/>
@@ -118,7 +128,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_location_gary"/>
+                android:src="@drawable/button_edit_tag"/>
             <TextView
                 android:id="@+id/tv_tag"
                 android:layout_width="wrap_content"

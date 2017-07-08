@@ -109,7 +109,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/arrow_left"
+                android:src="@drawable/selector_btn_click_arrow_left"
                 android:background="@android:color/transparent"
                 android:layout_gravity="left"
                 />
@@ -125,7 +125,7 @@
                 android:layout_gravity="right"
                 android:scaleType="fitXY"
                 android:layout_height="35dp"
-                android:src="@drawable/button_sure"
+                android:src="@drawable/selector_btn_click_sure"
                 android:background="@android:color/transparent"
                 android:layout_margin="5dp"
                 />

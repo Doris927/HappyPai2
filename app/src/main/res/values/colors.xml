@@ -11,5 +11,8 @@
     <color name="my_yellow">#e5e29f</color>
     <color name="black_bg">#434343</color>
     <color name="text_gray">#515151</color>
-
+    <color name="button_prev">#8a8a8a</color>
+    <color name="button_next">#F75857</color>
+    <drawable name="gray">#8a8a8a</drawable>
+    <drawable name="red">#F75857</drawable>
 </resources>
