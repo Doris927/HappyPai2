@@ -46,6 +46,9 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -313,6 +316,8 @@ public class ShareEditActivity extends AppCompatActivity implements View.OnClick
         int bytesRead, bytesAvailable, bufferSize;
         byte[] buffer;
         int maxBufferSize = 1 * 1024 * 1024;
+        Bitmap mBitMap = BitmapFactory.decodeFile(path);
+        Bitmap resized = Bitmap.createScaledBitmap(mBitMap, 320, 240, true);
         File sourceFile = new File(path);
 
         if (!sourceFile.isFile()) {
@@ -323,9 +328,11 @@ public class ShareEditActivity extends AppCompatActivity implements View.OnClick
         else
         {
             try {
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                resized.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+                byte[] bitmapdata = outputStream.toByteArray();
+                InputStream is = new ByteArrayInputStream(bitmapdata);
 
-                // open a URL connection to the Servlet
-                FileInputStream fileInputStream = new FileInputStream(sourceFile);
                 URL url = new URL(upLoadServerUri);
 
                 // Open a HTTP  connection to  the URL
@@ -347,20 +354,20 @@ public class ShareEditActivity extends AppCompatActivity implements View.OnClick
                 dos.writeBytes(lineEnd);
 
                 // create a buffer of  maximum size
-                bytesAvailable = fileInputStream.available();
+                bytesAvailable = is.available();
 
                 bufferSize = Math.min(bytesAvailable, maxBufferSize);
                 buffer = new byte[bufferSize];
 
                 // read file and write it into form...
-                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+                bytesRead = is.read(buffer, 0, bufferSize);
 
                 while (bytesRead > 0) {
 
                     dos.write(buffer, 0, bufferSize);
-                    bytesAvailable = fileInputStream.available();
+                    bytesAvailable = is.available();
                     bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                    bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+                    bytesRead = is.read(buffer, 0, bufferSize);
 
                 }
 
@@ -385,7 +392,7 @@ public class ShareEditActivity extends AppCompatActivity implements View.OnClick
                 }
 
                 //close the streams //
-                fileInputStream.close();
+                is.close();
                 dos.flush();
                 dos.close();
 

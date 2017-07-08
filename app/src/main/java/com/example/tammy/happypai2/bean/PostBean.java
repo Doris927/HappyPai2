@@ -60,6 +60,7 @@ public class PostBean {
         private Object location;
         private String time_stamp;
         private Object followee_id;
+        private String picture;
 
         public String getUser_name() {
             return user_name;
@@ -116,5 +117,9 @@ public class PostBean {
         public void setFollowee_id(Object followee_id) {
             this.followee_id = followee_id;
         }
+
+        public String getPicture(){ return picture; }
+
+        public void setPicture(String picture) { this.picture = picture; }
     }
 }

@@ -3,6 +3,7 @@ package com.example.tammy.happypai2.share;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -23,6 +24,8 @@ import com.example.tammy.happypai2.R;
 import com.hdl.myhttputils.MyHttpUtils;
 import com.hdl.myhttputils.bean.CommCallback;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -220,6 +223,20 @@ public class ShareSearchFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
 
+    public Drawable LoadImageFromWebOperations(String url) {
+        Log.v("draw", "get image url " + url);
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            Log.v("draw", "get image success");
+            return d;
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.v("draw", "get image fail");
+            return null;
+        }
+    }
+
     /**
      * 获得数据
      * @return
@@ -254,7 +271,7 @@ public class ShareSearchFragment extends Fragment {
                                 map.put("time",posts.get(i).getTime_stamp());
                                 map.put("hasfollow",posts.get(i).getFollowee_id() != null);
                                 map.put("content", posts.get(i).getState_text());
-                                map.put("img_content",R.drawable.advertise_img4);
+                                map.put("img_content",posts.get(i).getPicture());
                                 map.put("place",posts.get(i).getLocation());
                                 map.put("img_compose",R.drawable.button_effect_a);
                                 map.put("count_share","123");

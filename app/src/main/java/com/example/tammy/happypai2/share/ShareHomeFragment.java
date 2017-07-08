@@ -2,6 +2,7 @@ package com.example.tammy.happypai2.share;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,8 @@ import com.example.tammy.happypai2.bean.PostBean;
 import com.hdl.myhttputils.MyHttpUtils;
 import com.hdl.myhttputils.bean.CommCallback;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +52,7 @@ public class ShareHomeFragment extends Fragment {
                 mAdapter.notifyDataSetChanged();
         }
 
+
         private void getdata()
         {
                 SharedPreferences sharedPreferences2 = getContext()
@@ -79,7 +83,7 @@ public class ShareHomeFragment extends Fragment {
                                                         map.put("time",posts.get(i).getTime_stamp());
                                                         map.put("hasfollow",posts.get(i).getFollowee_id() != null);
                                                         map.put("content", posts.get(i).getState_text());
-                                                        map.put("img_content",R.drawable.advertise_img4);
+                                                        map.put("img_content",posts.get(i).getPicture());
                                                         map.put("place",posts.get(i).getLocation());
                                                         map.put("img_compose",R.drawable.button_effect_a);
                                                         map.put("count_share","123");

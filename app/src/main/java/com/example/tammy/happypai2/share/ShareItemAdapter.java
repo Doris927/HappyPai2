@@ -3,6 +3,10 @@ package com.example.tammy.happypai2.share;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +22,13 @@ import com.example.tammy.happypai2.bean.ShareBean;
 import com.hdl.myhttputils.MyHttpUtils;
 import com.hdl.myhttputils.bean.CommCallback;
 import com.hdl.myhttputils.utils.FailedMsgUtils;
+import com.squareup.picasso.Picasso;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -44,12 +54,47 @@ class ViewHolder
     public TextView tv_count_thumb;
 }
 
+
 public class ShareItemAdapter extends BaseAdapter {
     private LayoutInflater mInflater=null;
     private List<Map<String,Object>> data;
     private Context context;
     static private Set<String> isFollow;
 
+    public class DownloadImagesTask extends AsyncTask<Object, Void, Bitmap> {
+
+        ImageView imageView = null;
+
+        @Override
+        protected Bitmap doInBackground(Object... objects) {
+            this.imageView = (ImageView) objects[0];
+            String url = (String) objects[1];
+            return download_Image(url);
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            imageView.setImageBitmap(result);
+        }
+
+
+        private Bitmap download_Image(String url) {
+            Bitmap bm = null;
+            try {
+                URL aURL = new URL(url);
+                URLConnection conn = aURL.openConnection();
+                conn.connect();
+                InputStream is = conn.getInputStream();
+                BufferedInputStream bis = new BufferedInputStream(is);
+                bm = BitmapFactory.decodeStream(bis);
+                bis.close();
+                is.close();
+            } catch (IOException e) {
+                Log.e("Hub","Error getting the image from server : " + e.getMessage().toString());
+            }
+            return bm;
+        }
+    }
 
     public ShareItemAdapter(Context context,List<Map<String,Object>> data) {
         // TODO Auto-generated constructor stub
@@ -207,7 +252,15 @@ public class ShareItemAdapter extends BaseAdapter {
             }
         });
         holder.tv_content.setText((String)data.get(position).get("content"));
-        holder.img_content.setImageResource((Integer)data.get(position).get("img_content"));
+
+
+        if(data.get(position).get("img_content") == null){
+            holder.img_content.setImageResource(R.drawable.advertise_img4);
+        }
+        else{
+            String URL = "http://52.41.31.68/images/" + (String)data.get(position).get("img_content");
+            Picasso.with(context).load(URL).into(holder.img_content);
+        }
         holder.tv_place.setText((String)data.get(position).get("place"));
         holder.img_compose.setImageResource((Integer)data.get(position).get("img_compose"));
         holder.tv_count_share.setText((String)data.get(position).get("count_share"));
@@ -217,5 +270,7 @@ public class ShareItemAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+
 }
 
