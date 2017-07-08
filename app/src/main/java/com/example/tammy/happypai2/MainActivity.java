@@ -156,9 +156,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 Log.v("button_test","button_help");
                 Log.v("button_test","button_effect");
                 Toast.makeText(this, "choose a photo", Toast.LENGTH_LONG).show();
-                Intent intent2 = new Intent(Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent2, IMAGE2);
+                startActivity(new Intent(this,HelpActivity.class));
                 break;
             default:
                 break;

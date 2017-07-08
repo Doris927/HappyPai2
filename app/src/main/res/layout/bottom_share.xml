@@ -21,7 +21,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:scaleType="fitXY"
-            android:src="@drawable/tab_home_a"
+            android:src="@drawable/selector_btn_click_tab_home"
             android:background="#00000000"/>
     </LinearLayout>
     <LinearLayout
@@ -38,7 +38,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:scaleType="fitXY"
-            android:src="@drawable/tab_search_a"
+            android:src="@drawable/selector_btn_click_tab_search"
             android:background="#00000000"/>
     </LinearLayout>
     <LinearLayout
@@ -53,7 +53,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:scaleType="fitXY"
-            android:src="@drawable/tab_add_a"
+            android:src="@drawable/selector_btn_click_tab_add"
             android:background="#00000000"
             android:layout_weight="1"/>
     </LinearLayout>
@@ -72,7 +72,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:scaleType="fitXY"
-            android:src="@drawable/tab_recent_a"
+            android:src="@drawable/selector_btn_click_tab_recent"
             android:background="#00000000"/>
     </LinearLayout>
     <LinearLayout
@@ -88,7 +88,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:scaleType="fitXY"
-            android:src="@drawable/tab_profile_a"
+            android:src="@drawable/selector_btn_click_tab_profile"
             android:background="#00000000"/>
     </LinearLayout>
 
