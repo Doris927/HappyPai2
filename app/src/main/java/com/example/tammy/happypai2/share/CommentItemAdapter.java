@@ -36,6 +36,11 @@ public class CommentItemAdapter extends BaseAdapter {
         this.context = context;
     }
 
+    public void setData(List<Map<String,Object>> data){
+        this.data = data;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return data.size();

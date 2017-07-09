@@ -329,5 +329,4 @@ public class ShareSearchFragment extends Fragment implements View.OnClickListene
                 });
     }
 
-
 }

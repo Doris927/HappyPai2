@@ -88,9 +88,14 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                                 list.add(map);
                             }
 
-                            CommentItemAdapter adapter=new CommentItemAdapter(getApplicationContext(),list);
-                            mAdapter = adapter;
-                            lv.setAdapter(adapter);
+                            if(mAdapter == null) {
+                                CommentItemAdapter adapter = new CommentItemAdapter(getApplicationContext(), list);
+                                mAdapter = adapter;
+                                lv.setAdapter(adapter);
+                            }
+                            else{
+                                mAdapter.setData(list);
+                            }
                         }else{
 
                         }
@@ -114,5 +119,11 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             default:break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getdata();
     }
 }
