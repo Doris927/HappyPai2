@@ -54,7 +54,7 @@ public class ShareHomeFragment extends Fragment {
         }
 
 
-        private void getdata()
+        public void getdata()
         {
                 SharedPreferences sharedPreferences2 = getContext()
                         .getSharedPreferences("user", Context.MODE_PRIVATE);
@@ -100,7 +100,6 @@ public class ShareHomeFragment extends Fragment {
                                                         map.put("composition",posts.get(i).getLayout_id());
 
                                                         list.add(map);
-
 
                                                 }
 

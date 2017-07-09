@@ -455,6 +455,7 @@ public class ShareEditActivity extends AppCompatActivity implements View.OnClick
                 dialog.dismiss();
             }
 
+            finish();
             return serverResponseCode;
 
         } // End else block

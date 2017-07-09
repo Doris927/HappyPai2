@@ -261,7 +261,7 @@ public class ShareSearchFragment extends Fragment implements View.OnClickListene
      * 获得数据
      * @return
      */
-    private void getdata(String action, String search_kw)
+    public void getdata(String action, String search_kw)
     {
         SharedPreferences sharedPreferences2 = getContext()
                 .getSharedPreferences("user", Context.MODE_PRIVATE);

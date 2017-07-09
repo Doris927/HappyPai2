@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.tammy.happypai2.R;
@@ -23,10 +24,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CommentActivity extends AppCompatActivity {
+public class CommentActivity extends AppCompatActivity implements View.OnClickListener{
     private ListView lv;
     private CommentItemAdapter mAdapter;
     private String state_id;
+    private Button addBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class CommentActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Comments");
 
+        addBtn = (Button)findViewById(R.id.comment_addBtn);
+        addBtn.setOnClickListener(this);
         Intent intent = getIntent();
         state_id = intent.getStringExtra("state_id");
         Log.v("intent", state_id + "");
@@ -98,5 +102,17 @@ public class CommentActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.comment_addBtn:
+                Intent intent = new Intent(CommentActivity.this,CommentEditActivity.class);
+                intent.putExtra("state_id", state_id);
+                startActivity(intent);
+                break;
+            default:break;
+        }
     }
 }
