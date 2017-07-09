@@ -43,8 +43,7 @@
                 android:layout_gravity="right"
                 android:layout_margin="5dp"
                 android:background="@drawable/selector_btn_click_sure"
-                android:scaleType="fitXY"
-                android:src="@drawable/button_sure" />
+                android:scaleType="fitXY" />
         </LinearLayout>
     </LinearLayout>
 
@@ -72,21 +71,7 @@
             android:visibility="gone" />
 
 
-        <ImageButton
-            android:id="@+id/bt_compare"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/iv_original_pic"
 
-            android:layout_marginEnd="17dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginTop="19dp"
-            android:layout_weight="0.24"
-            android:background="@drawable/selector_btn_click_compare"
-            android:paddingTop="15dp"
-            android:textColor="@android:color/white" />
 
         <LinearLayout
             android:id="@id/bottomBtLayout"
@@ -102,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/effect_button_height"
                 android:background="@android:color/transparent"
-                android:drawableTop="@drawable/button_edit_a"
+                android:drawableTop="@drawable/selector_button_edit"
                 android:text="編集"
                 android:textColor="@color/text_gray" />
 
@@ -120,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/effect_button_height"
                 android:background="@android:color/transparent"
-                android:drawableTop="@drawable/button_effect2_a"
+                android:drawableTop="@drawable/selector_button_effect2"
                 android:text="エフェクト"
                 android:textColor="@color/text_gray" />
 
@@ -129,10 +114,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/effect_button_height"
                 android:background="@android:color/transparent"
-                android:drawableTop="@drawable/button_clear_a"
+                android:drawableTop="@drawable/selector_button_clear"
                 android:text="クリア"
                 android:textColor="@color/text_gray" />
         </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/bt_compare"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="17dp"
+            android:layout_marginTop="19dp"
+            android:background="@drawable/selector_btn_click_compare"/>
+
     </RelativeLayout>
 
 

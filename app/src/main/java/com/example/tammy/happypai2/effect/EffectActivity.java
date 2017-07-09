@@ -32,8 +32,8 @@ public class EffectActivity extends AppCompatActivity implements View.OnClickLis
 
 
     ImageView imageView, iv_original;
-    ImageButton ibt_back,ibt_sure;
-    Button bt_edit, bt_strengthen, bt_effect, bt_clear, bt_compare;
+    ImageButton ibt_back,ibt_sure,bt_compare;
+    Button bt_edit, bt_strengthen, bt_effect, bt_clear;
 
     private GPUImage gpuImage;
 
@@ -81,7 +81,7 @@ public class EffectActivity extends AppCompatActivity implements View.OnClickLis
         bt_strengthen = (Button)findViewById(R.id.bt_strengthen);
         bt_effect = (Button)findViewById(R.id.bt_effect);
         bt_clear = (Button)findViewById(R.id.bt_clear);
-        bt_compare = (Button)findViewById(R.id.bt_compare);
+        bt_compare = (ImageButton)findViewById(R.id.bt_compare);
 
         ibt_back.setOnClickListener(this);
         ibt_sure.setOnClickListener(this);
@@ -89,7 +89,8 @@ public class EffectActivity extends AppCompatActivity implements View.OnClickLis
         bt_strengthen.setOnClickListener(this);
         bt_effect.setOnClickListener(this);
         bt_clear.setOnClickListener(this);
-        bt_compare.setOnClickListener(this);
+
+        bt_compare.bringToFront();
 
         bt_compare.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -134,9 +135,8 @@ public class EffectActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.bt_clear:
                 bm_effect = bm;
                 imageView.setImageBitmap(bm_effect);
-                break;
-            case R.id.bt_compare:
-
+                String fileName = "temp_effect.png";
+                pathTemp = Util.saveImage(getApplicationContext(),bm_effect,fileName);
                 break;
             default:
                 break;
