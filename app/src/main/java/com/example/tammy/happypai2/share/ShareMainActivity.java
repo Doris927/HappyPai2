@@ -93,6 +93,7 @@ public class ShareMainActivity extends AppCompatActivity implements View.OnClick
 
         };
         //不要忘记设置ViewPager的适配器
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(mAdapter);
         //设置ViewPager的切换监听
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

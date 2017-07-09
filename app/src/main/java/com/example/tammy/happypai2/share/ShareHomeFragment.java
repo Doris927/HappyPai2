@@ -107,7 +107,7 @@ public class ShareHomeFragment extends Fragment {
                                                         lv.setAdapter(mAdapter);
                                                 }
                                                 else{
-                                                        lv.setAdapter(mAdapter);
+                                                        //lv.setAdapter(mAdapter);
                                                         mAdapter.setData(list);
                                                 }
                                         }else{
@@ -125,7 +125,6 @@ public class ShareHomeFragment extends Fragment {
         @Override
         public void onResume() {
                 super.onResume();
-                Log.v("test","resume");
                 getdata();
         }
 }
