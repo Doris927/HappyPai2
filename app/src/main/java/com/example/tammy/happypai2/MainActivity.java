@@ -134,7 +134,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 Intent intent = new Intent(Intent.ACTION_PICK,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, IMAGE);
-
                 break;
             case R.id.button_album:
                 Log.v("button_test","button_album");
@@ -146,11 +145,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.button_cm1:
                 Log.v("button_test","button_cm1");
-                startActivity(new Intent(this,AskPositionActivity.class));
+                startActivity(new Intent(this,CMActivity.class));
                 break;
             case R.id.button_cm2:
                 Log.v("button_test","button_cm2");
-                startActivity(new Intent(this,TestActivity.class));
+                startActivity(new Intent(this,CMActivity.class));
                 break;
             case R.id.button_help:
                 Log.v("button_test","button_help");
