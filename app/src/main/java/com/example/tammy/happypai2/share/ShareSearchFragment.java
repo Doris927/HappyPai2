@@ -300,6 +300,7 @@ public class ShareSearchFragment extends Fragment implements View.OnClickListene
                                 map.put("count_share","123");
                                 map.put("count_comment","123");
                                 map.put("count_thumb","123");
+                                map.put("state_id", posts.get(i).getState_id());
                                 list.add(map);
                             }
                             if(mAdapter == null) {

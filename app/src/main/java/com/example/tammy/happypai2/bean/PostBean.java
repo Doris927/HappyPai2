@@ -57,10 +57,19 @@ public class PostBean {
         private String user_id;
         private String state_id;
         private String state_text;
+        private String content;
         private Object location;
         private String time_stamp;
         private Object followee_id;
         private String picture;
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
 
         public String getUser_name() {
             return user_name;
