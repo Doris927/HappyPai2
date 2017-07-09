@@ -71,18 +71,31 @@
             android:id="@+id/ll_structure"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/button_ask_composition"/>
+                android:src="@drawable/button_ask_composition" />
+
             <TextView
                 android:id="@+id/tv_structure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="構図"/>
+                android:text="構図" />
+
+            <ImageView
+                android:id="@+id/iv_composition"
+                android:src="@drawable/button_com_six"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:paddingLeft="220dp"
+                android:paddingRight="15dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                />
         </LinearLayout>
 
         <View style="@style/bg_line"/>
@@ -135,6 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="タグ"/>
+
         </LinearLayout>
 
     </LinearLayout>

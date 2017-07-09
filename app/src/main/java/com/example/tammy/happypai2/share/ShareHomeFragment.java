@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,7 +96,12 @@ public class ShareHomeFragment extends Fragment {
                                                         }
                                                         map.put("count_thumb","123");
                                                         map.put("state_id", posts.get(i).getState_id());
+                                                        Log.v("composition",posts.get(i).getLayout_id());
+                                                        map.put("composition",posts.get(i).getLayout_id());
+
                                                         list.add(map);
+
+
                                                 }
 
                                                 ShareItemAdapter adapter=new ShareItemAdapter(getContext(),list);

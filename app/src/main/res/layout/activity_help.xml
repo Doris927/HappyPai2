@@ -37,20 +37,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:orientation="vertical"
-                android:padding="5dp"
-                android:weightSum="1">
+                android:padding="5dp">
 
                 <ImageView
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="177dp"
                     android:layout_height="91dp"
-                    android:layout_marginLeft="100dp"
                     android:src="@drawable/titile_heart" />
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
                     android:id="@+id/textView3"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="150dp"
                     android:text="HappyPai 1.0" />
 
             </LinearLayout>

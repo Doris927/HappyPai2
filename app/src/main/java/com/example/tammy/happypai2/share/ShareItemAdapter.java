@@ -161,6 +161,20 @@ public class ShareItemAdapter extends BaseAdapter {
             holder.bt_follow.setTag(1);
         }*/
 
+        Log.v("adapter composition",(String) data.get(position).get("composition"));
+
+        switch (Integer.valueOf((String) data.get(position).get("composition"))){
+            case 0:
+                holder.img_compose.setImageResource(R.drawable.button_com_four);
+                break;
+            case 1:
+                holder.img_compose.setImageResource(R.drawable.button_com_six);
+                break;
+            default:
+                holder.img_compose.setVisibility(View.INVISIBLE);
+                break;
+        }
+
         if(isFollow.contains((String)data.get(position).get("user_id"))){
             holder.bt_follow.setText("Unfollow");
             holder.bt_follow.setTag(0);
@@ -246,7 +260,6 @@ public class ShareItemAdapter extends BaseAdapter {
             Picasso.with(context).load(URL).into(holder.img_content);
         }
         holder.tv_place.setText((String)data.get(position).get("place"));
-        holder.img_compose.setImageResource((Integer)data.get(position).get("img_compose"));
         holder.tv_count_share.setText((String)data.get(position).get("count_share"));
         holder.tv_count_comment.setText((String)data.get(position).get("count_comment"));
         holder.tv_count_thumb.setText((String)data.get(position).get("count_thumb"));

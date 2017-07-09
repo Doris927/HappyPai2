@@ -18,6 +18,8 @@ public class PostBean {
     private String msg;
     private List<SharesBean> shares;
 
+
+
     public int getState() {
         return state;
     }
@@ -63,6 +65,15 @@ public class PostBean {
         private Object followee_id;
         private String picture;
         private String comment_num;
+        private String layout_id;
+
+        public String getLayout_id() {
+            return layout_id;
+        }
+
+        public void setLayout_id(String layout_id) {
+            this.layout_id = layout_id;
+        }
 
         public String getComment_num() {
             return comment_num;

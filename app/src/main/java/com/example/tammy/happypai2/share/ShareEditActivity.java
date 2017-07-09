@@ -1,6 +1,7 @@
 package com.example.tammy.happypai2.share;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -27,9 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tammy.happypai2.AskPositionActivity;
 import com.example.tammy.happypai2.R;
-import com.example.tammy.happypai2.bean.RegisterBean;
 import com.example.tammy.happypai2.bean.ShareBean;
 import com.example.tammy.happypai2.util.Constants;
 import com.example.tammy.happypai2.util.FetchAddressIntentService;
@@ -49,18 +48,13 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ShareEditActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -80,6 +74,11 @@ public class ShareEditActivity extends AppCompatActivity implements View.OnClick
     String user_id;
 
     private ProgressDialog mProgressDialog;
+
+    private final int STRUCTURE=1;
+
+    private ImageView iv_composition;
+    private int composition = -1;
 
 
     @Override
@@ -173,6 +172,9 @@ public class ShareEditActivity extends AppCompatActivity implements View.OnClick
         tv_privacy = (TextView)findViewById(R.id.tv_privacy);
         tv_tag = (TextView)findViewById(R.id.tv_tag);
 
+        iv_composition = (ImageView)findViewById(R.id.iv_composition);
+        iv_composition.setVisibility(View.INVISIBLE);
+
         ll_location.setOnClickListener(this);
         ll_privacy.setOnClickListener(this);
         ll_structure.setOnClickListener(this);
@@ -217,11 +219,38 @@ public class ShareEditActivity extends AppCompatActivity implements View.OnClick
             case R.id.ll_privacy:
                 break;
             case R.id.ll_structure:
+                Log.v("button_test","ll_structure");
+                Intent intent=new Intent();
+                intent.setClass(this,CompositionActivity.class);
+                startActivityForResult(intent, STRUCTURE);
                 break;
             case R.id.ll_tag:
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == STRUCTURE && resultCode == Activity.RESULT_OK){
+            composition = data.getIntExtra("composition",-1);
+            //imageLoader.loadImage(path,iv_refer);
+            switch (composition){
+                case 0:
+                    iv_composition.setImageResource(R.drawable.button_com_four);
+                    iv_composition.setVisibility(View.VISIBLE);
+                    break;
+                case 1:
+                    iv_composition.setImageResource(R.drawable.button_com_six);
+                    iv_composition.setVisibility(View.VISIBLE);
+                    break;
+                default:
+                    iv_composition.setVisibility(View.INVISIBLE);
+                    break;
+            }
+            Toast.makeText(this,path,Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -271,6 +300,7 @@ public class ShareEditActivity extends AppCompatActivity implements View.OnClick
         params.put("state_text",content);
         params.put("location",location);
         params.put("image",1);
+        params.put("layout_id",composition);
 
         MyHttpUtils.build()//构建myhttputils
                 .url("http://52.41.31.68/api")//请求的url

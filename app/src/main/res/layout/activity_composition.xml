@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.tammy.happypai2.share.CompositionActivity"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black_bg"
+        android:padding="10dp"
+        android:id="@+id/topBtLayout">
+        <ImageButton
+            android:id="@+id/bt_cancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/selector_btn_click_arrow_left"
+            android:background="#00000000"
+            android:layout_alignParentLeft="true"/>
+        <ImageButton
+            android:id="@+id/bt_sure"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/selector_btn_click_sure"
+            android:background="#00000000"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_com_four"
+            android:background="@android:color/transparent"
+            android:src="@drawable/button_com_four"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_vertical"/>
+
+        <ImageButton
+            android:id="@+id/btn_com_six"
+            android:background="@android:color/transparent"
+            android:src="@drawable/button_com_six"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_vertical"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

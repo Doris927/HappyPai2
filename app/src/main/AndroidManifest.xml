@@ -83,14 +83,12 @@
         <activity android:name=".HelpActivity" />
         <activity android:name=".Send_messagActivity" />
         <activity android:name=".About_usActivity" />
-        <activity android:name=".CMActivity"></activity>
+        <activity android:name=".CMActivity" />
         <activity android:name=".HelpActivity" />
         <activity
             android:name=".share.CommentActivity"
-            android:label="@string/title_activity_comment"
-            >
-
-        </activity>
+            android:label="@string/title_activity_comment"></activity>
+        <activity android:name=".share.CompositionActivity"></activity>
     </application>
 
 </manifest>
