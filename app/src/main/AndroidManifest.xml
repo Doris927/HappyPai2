@@ -82,7 +82,8 @@
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
         <activity android:name=".HelpActivity" />
         <activity android:name=".Send_messagActivity" />
-        <activity android:name=".About_usActivity"></activity>
+        <activity android:name=".About_usActivity" />
+        <activity android:name=".CMActivity"></activity>
     </application>
 
 </manifest>
