@@ -5,22 +5,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-public class HelpActivity extends AppCompatActivity {
+public class About_usActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_help);
+        setContentView(R.layout.activity_about_us);
     }
 
-
-
-    public void about_us(View view){
-        startActivity(new Intent(this,About_usActivity.class));
-    }
-    public void send_message(View view){
+    public void contact_us(View view){
         startActivity(new Intent(this,Send_messagActivity.class));
     }
-
-
 }

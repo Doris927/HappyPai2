@@ -61,7 +61,7 @@
 
         <!-- 下圆角-->
         <LinearLayout
-            android:id="@+id/about_us"
+            android:id="@+id/about_us1"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/light_bg"
@@ -82,13 +82,13 @@
                 android:text="About Us" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/about_us"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="130dp"
-                android:layout_weight="0.04"
-                android:scaleType="fitCenter"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="165dp"
                 android:backgroundTint="@color/light_bg"
+                android:onClick="about_us"
+                android:scaleType="fitCenter"
                 app:srcCompat="@drawable/button_arrow_right_b" />
 
 
@@ -98,12 +98,14 @@
 
         <!-- 下圆角-->
         <LinearLayout
-            android:id="@+id/send_message"
+            android:id="@+id/send_message1"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/light_bg"
+            android:onClick=""
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:weightSum="1">
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -119,12 +121,13 @@
                 android:text="Send message to our team" />
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/send_message"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_weight="0.04"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="55dp"
+                android:layout_weight="0.06"
                 android:backgroundTint="@color/light_bg"
+                android:onClick="send_message"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/button_arrow_right_b" />
 

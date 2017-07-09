@@ -7,4 +7,10 @@
     <string name="title_activity_camera">CameraActivity</string>
     <string name="takephoto">take a photo</string>
     <string name="success">success</string>
+    <string name="view1">If you experience an issue using HappyPai, visit the HappyPai Help Center to find a solution.
+        If you are still unable to resolve your issue or would like to leave your feedback about HappyPai, contact us.
+</string>
+    <string name="view2">Businesses seeking to leverage the HappyPai platform for connecting to the HappyPai ecosystem can learn more about opportunities on the HappyPai Open Platform.
+        For additional inquiries about the Open Platform, contact us.</string>
+    <string name="view4">For more information about how to generate a valid law enforcement data request, contact us.</string>
 </resources>
