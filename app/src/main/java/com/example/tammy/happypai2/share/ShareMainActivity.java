@@ -183,16 +183,28 @@ public class ShareMainActivity extends AppCompatActivity implements View.OnClick
         //根据点击的Tab设置对应的ImageButton为绿色
         switch (i) {
             case 0:
-                mImgHome.setImageResource(R.drawable.tab_home_a);
+                mImgHome.setImageResource(R.drawable.button_tab_home_b);
+                mImgSearch.setImageResource(R.drawable.button_tab_search_a);
+                mImgFriend.setImageResource(R.drawable.button_tab_recent_a);
+                mImgProfile.setImageResource(R.drawable.button_tab_profile_a);
                 break;
             case 1:
-                mImgSearch.setImageResource(R.drawable.tab_search_a);
+                mImgHome.setImageResource(R.drawable.button_tab_home_a);
+                mImgSearch.setImageResource(R.drawable.button_tab_search_b);
+                mImgFriend.setImageResource(R.drawable.button_tab_recent_a);
+                mImgProfile.setImageResource(R.drawable.button_tab_profile_a);
                 break;
             case 2:
-                mImgFriend.setImageResource(R.drawable.tab_recent_a);
+                mImgHome.setImageResource(R.drawable.button_tab_home_a);
+                mImgSearch.setImageResource(R.drawable.button_tab_search_a);
+                mImgFriend.setImageResource(R.drawable.button_tab_recent_b);
+                mImgProfile.setImageResource(R.drawable.button_tab_profile_a);
                 break;
             case 3:
-                mImgProfile.setImageResource(R.drawable.tab_profile_a);
+                mImgHome.setImageResource(R.drawable.button_tab_home_a);
+                mImgSearch.setImageResource(R.drawable.button_tab_search_a);
+                mImgFriend.setImageResource(R.drawable.button_tab_recent_a);
+                mImgProfile.setImageResource(R.drawable.button_tab_profile_b);
                 break;
         }
         //设置当前点击的Tab所对应的页面

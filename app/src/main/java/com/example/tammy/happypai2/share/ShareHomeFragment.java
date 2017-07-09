@@ -103,11 +103,11 @@ public class ShareHomeFragment extends Fragment {
 
                                                 }
                                                 if(mAdapter == null) {
-                                                        ShareItemAdapter adapter = new ShareItemAdapter(getContext(), list);
-                                                        mAdapter = adapter;
-                                                        lv.setAdapter(adapter);
+                                                       mAdapter = new ShareItemAdapter(getContext(), list);
+                                                        lv.setAdapter(mAdapter);
                                                 }
                                                 else{
+                                                        lv.setAdapter(mAdapter);
                                                         mAdapter.setData(list);
                                                 }
                                         }else{
@@ -125,6 +125,7 @@ public class ShareHomeFragment extends Fragment {
         @Override
         public void onResume() {
                 super.onResume();
+                Log.v("test","resume");
                 getdata();
         }
 }

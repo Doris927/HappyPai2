@@ -242,7 +242,12 @@ public class ShareSearchFragment extends Fragment implements View.OnClickListene
     }
 
     public void refreshList(){
-        mAdapter.notifyDataSetChanged();
+        if (mAdapter==null){
+
+        }else {
+            mAdapter.notifyDataSetChanged();
+        }
+
     }
 
     public Drawable LoadImageFromWebOperations(String url) {

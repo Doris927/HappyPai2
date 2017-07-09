@@ -65,6 +65,7 @@
             android:layout_height="40dp"
             android:background="@color/light_bg"
             android:orientation="horizontal"
+            android:onClick="about_us"
             android:padding="5dp">
 
             <ImageView
@@ -101,7 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/light_bg"
-            android:onClick=""
+            android:onClick="send_message"
             android:orientation="horizontal"
             android:padding="5dp"
             android:weightSum="1">

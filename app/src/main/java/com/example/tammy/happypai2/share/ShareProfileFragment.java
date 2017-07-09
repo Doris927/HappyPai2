@@ -22,6 +22,7 @@ import java.util.Map;
 public class ShareProfileFragment extends Fragment {
     private NoScrollListView lv;
     private List<Map<String,Object>> data;
+    private ShareItemAdapter2 mAdapter;
 
     @Nullable
     @Override
@@ -36,8 +37,8 @@ public class ShareProfileFragment extends Fragment {
 
         lv=(NoScrollListView) getView().findViewById(R.id.share_profile_lv);
         data=getdata();
-        ShareItemAdapter adapter=new ShareItemAdapter(getContext(),data);
-        lv.setAdapter(adapter);
+        mAdapter=new ShareItemAdapter2(getContext(),data);
+        lv.setAdapter(mAdapter);
     }
 
     private List<Map<String,Object>> getdata()
