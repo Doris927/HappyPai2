@@ -88,7 +88,7 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-            <com.example.tammy.happypai.NoScrollListView
+            <com.example.tammy.happypai2.util.NoScrollListView
                 android:id="@+id/share_profile_lv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                 android:layout_marginTop="15dp"
                 android:dividerHeight="15dp">
 
-            </com.example.tammy.happypai.NoScrollListView>
+            </com.example.tammy.happypai2.util.NoScrollListView>
         </LinearLayout>
     </ScrollView>
 
