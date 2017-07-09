@@ -24,6 +24,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 public class AskActivity extends AppCompatActivity implements View.OnClickListener,SurfaceHolder.Callback{
 
@@ -47,12 +49,17 @@ public class AskActivity extends AppCompatActivity implements View.OnClickListen
     private static final int IMAGE = 1;
     private static final int POSITION=2;
     private static final int CAPTURE =3;
-    //hahhahahhahahhah
-    //lallalallllal
-    ImageButton bt_capture;
+    private int mCurrentCameraId = 0; // 1是前置 0是后置
+
+    ImageButton bt_capture,bt_flash,bt_turn, bt_cancel;
     ImageView iv_refer;
 
     ImageLoader imageLoader;
+
+    private ImageButton bt_com, bt_com_four, bt_com_six;
+    private LinearLayout toolLayout;
+    private ImageView iv_composition;
+    private int type=-1;
 
 
     private Camera.PictureCallback mPictureCallback = new Camera.PictureCallback() {
@@ -81,9 +88,24 @@ public class AskActivity extends AppCompatActivity implements View.OnClickListen
         context = this;
         setContentView(R.layout.activity_ask);
         bt_capture = (ImageButton) findViewById(R.id.btCapture);
+        bt_flash = (ImageButton)findViewById(R.id.bt_flash);
+        bt_turn = (ImageButton)findViewById(R.id.bt_turn);
+        bt_cancel = (ImageButton)findViewById(R.id.btCancel);
         iv_refer = (ImageView)findViewById(R.id.image_refer);
+        bt_com = (ImageButton)findViewById(R.id.btComposition);
+        bt_com_four = (ImageButton) findViewById(R.id.btn_com_four);
+        bt_com_six = (ImageButton) findViewById(R.id.btn_com_six);
+        toolLayout = (LinearLayout) findViewById(R.id.toolLayout);
+        iv_composition = (ImageView) findViewById(R.id.iv_composition);
+
+        bt_com.setOnClickListener(this);
+        bt_com_four.setOnClickListener(this);
+        bt_com_six.setOnClickListener(this);
 
         bt_capture.setOnClickListener(this);
+        bt_flash.setOnClickListener(this);
+        bt_turn.setOnClickListener(this);
+        bt_cancel.setOnClickListener(this);
         iv_refer.setOnClickListener(this);
 
         mPreview=(SurfaceView)findViewById(R.id.preview);
@@ -105,9 +127,67 @@ public class AskActivity extends AppCompatActivity implements View.OnClickListen
                 Log.v("button_test","image_refer");
                 initPopupWindow();
                 break;
+            case R.id.bt_flash:
+                turnLight();
+                break;
+            case R.id.bt_turn:
+                switchCamera();
+                break;
+            case R.id.btCancel:
+                finish();
+                break;
+            case R.id.btComposition:
+                showToolLayout();
+                break;
+            case R.id.btn_com_four:
+                showComposition(0);
+                break;
+            case R.id.btn_com_six:
+                showComposition(1);
+                break;
             default:
                 break;
         }
+    }
+
+    private void showComposition(int mType){
+
+        if (type == mType){
+            iv_composition.setVisibility(View.INVISIBLE);
+            bt_com_four.setImageResource(R.drawable.button_com_four);
+            bt_com_six.setImageResource(R.drawable.button_com_six);
+            type = -1;
+            toolLayout.setVisibility(View.INVISIBLE);
+            return;
+        }
+
+        switch (mType){
+            case 0:
+                iv_composition.setImageResource(R.drawable.img_com_four);
+                bt_com_four.setImageResource(R.drawable.button_com_four_b);
+                bt_com_six.setImageResource(R.drawable.button_com_six);
+                type = 0;
+                break;
+            case 1:
+                iv_composition.setImageResource(R.drawable.img_com_six);
+                bt_com_six.setImageResource(R.drawable.button_com_six_b);
+                bt_com_four.setImageResource(R.drawable.button_com_four);
+                type = 1;
+                break;
+            default:
+                break;
+        }
+        iv_composition.setVisibility(View.VISIBLE);
+        toolLayout.setVisibility(View.INVISIBLE);
+    }
+
+    private void showToolLayout(){
+        if (toolLayout.getVisibility()==View.INVISIBLE){
+            toolLayout.setVisibility(View.VISIBLE);
+        }else{
+            toolLayout.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     class popupDismissListener implements PopupWindow.OnDismissListener{
@@ -356,4 +436,66 @@ public class AskActivity extends AppCompatActivity implements View.OnClickListen
     public void surfaceDestroyed(SurfaceHolder holder) {
         releaseCamera();
     }
+
+
+    /**
+     * 闪光灯开关 开->关->自动
+     */
+    private void turnLight() {
+        if (mCamera == null || mCamera.getParameters() == null
+                || mCamera.getParameters().getSupportedFlashModes() == null) {
+            return;
+        }
+        Camera.Parameters parameters = mCamera.getParameters();
+        String flashMode = mCamera.getParameters().getFlashMode();
+        List<String> supportedModes = mCamera.getParameters()
+                .getSupportedFlashModes();
+        if (Camera.Parameters.FLASH_MODE_OFF.equals(flashMode)
+                && supportedModes.contains(Camera.Parameters.FLASH_MODE_ON)) {// 关闭状态
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
+            mCamera.setParameters(parameters);
+            bt_flash.setImageResource(R.drawable.button_flash_on);
+        } else if (Camera.Parameters.FLASH_MODE_ON.equals(flashMode)) {// 开启状态
+            if (supportedModes.contains(Camera.Parameters.FLASH_MODE_AUTO)) {
+                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
+//                flashBtn.setImageResource(R.drawable.camera_flash_auto);
+                mCamera.setParameters(parameters);
+                bt_flash.setImageResource(R.drawable.button_flash_auto);
+            } else if (supportedModes
+                    .contains(Camera.Parameters.FLASH_MODE_OFF)) {
+                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+//                flashBtn.setImageResource(R.drawable.camera_flash_off);
+                mCamera.setParameters(parameters);
+                bt_flash.setImageResource(R.drawable.button_flash_off);
+            }
+            bt_flash.setImageResource(R.drawable.button_flash_auto);
+        } else if (Camera.Parameters.FLASH_MODE_AUTO.equals(flashMode)
+                && supportedModes.contains(Camera.Parameters.FLASH_MODE_OFF)) {
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+            mCamera.setParameters(parameters);
+//            flashBtn.setImageResource(R.drawable.camera_flash_off);
+            bt_flash.setImageResource(R.drawable.button_flash_off);
+        }
+    }
+
+    /**
+     * 切换前后置摄像头
+     */
+    private void switchCamera() {
+        mCurrentCameraId = (mCurrentCameraId + 1) % Camera.getNumberOfCameras();
+        if (mCamera != null) {
+            mCamera.setPreviewCallback(null);
+            mCamera.stopPreview();
+            mCamera.release();
+            mCamera = null;
+        }
+        try {
+            mCamera = Camera.open(mCurrentCameraId);
+            setStartPreview(mCamera,mHolder);
+        } catch (Exception e) {
+            Toast.makeText(this, "未发现相机", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
 }

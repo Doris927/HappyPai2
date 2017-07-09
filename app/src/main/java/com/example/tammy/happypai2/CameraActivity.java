@@ -13,6 +13,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.File;
@@ -28,12 +30,18 @@ public class CameraActivity extends Activity implements View.OnClickListener,Sur
     private SurfaceHolder mHolder;
     private ImageButton bt_capture,bt_cancel,bt_turn,bt_flash;
 
+    private ImageButton bt_com, bt_com_four, bt_com_six;
+    private LinearLayout toolLayout;
+    private ImageView iv_composition;
+
     private int mCurrentCameraId = 0; // 1是前置 0是后置
 
 
     private boolean select = false;
 
     private final int POSITION=1;
+
+    private int type=-1;
 
 
     private Camera.PictureCallback mPictureCallback = new Camera.PictureCallback() {
@@ -94,10 +102,17 @@ public class CameraActivity extends Activity implements View.OnClickListener,Sur
         bt_cancel=(ImageButton)findViewById(R.id.btCancel);
         bt_turn = (ImageButton)findViewById(R.id.btTurnCamera);
         bt_flash = (ImageButton)findViewById(R.id.btFlash);
+        bt_com = (ImageButton)findViewById(R.id.btComposition);
+        bt_com_four = (ImageButton) findViewById(R.id.btn_com_four);
+        bt_com_six = (ImageButton) findViewById(R.id.btn_com_six);
+        toolLayout = (LinearLayout) findViewById(R.id.toolLayout);
+        iv_composition = (ImageView) findViewById(R.id.iv_composition);
 
         mPreview=(SurfaceView)findViewById(R.id.preview);
 
-
+        bt_com.setOnClickListener(this);
+        bt_com_four.setOnClickListener(this);
+        bt_com_six.setOnClickListener(this);
         bt_capture.setOnClickListener(this);
         bt_turn.setOnClickListener(this);
         bt_cancel.setOnClickListener(this);
@@ -123,15 +138,64 @@ public class CameraActivity extends Activity implements View.OnClickListener,Sur
                 Log.v("button_test","button_turn_light");
                 turnLight();
                 break;
+            case R.id.btComposition:
+                showToolLayout();
+                break;
+            case R.id.btn_com_four:
+                showComposition(0);
+                break;
+            case R.id.btn_com_six:
+                showComposition(1);
+                break;
             default:
                 break;
         }
     }
 
+    private void showComposition(int mType){
+
+        if (type == mType){
+            iv_composition.setVisibility(View.INVISIBLE);
+            bt_com_four.setImageResource(R.drawable.button_com_four);
+            bt_com_six.setImageResource(R.drawable.button_com_six);
+            type = -1;
+            toolLayout.setVisibility(View.INVISIBLE);
+            return;
+        }
+
+        switch (mType){
+            case 0:
+                iv_composition.setImageResource(R.drawable.img_com_four);
+                bt_com_four.setImageResource(R.drawable.button_com_four_b);
+                bt_com_six.setImageResource(R.drawable.button_com_six);
+                type = 0;
+                break;
+            case 1:
+                iv_composition.setImageResource(R.drawable.img_com_six);
+                bt_com_six.setImageResource(R.drawable.button_com_six_b);
+                bt_com_four.setImageResource(R.drawable.button_com_four);
+                type = 1;
+                break;
+            default:
+                break;
+        }
+        iv_composition.setVisibility(View.VISIBLE);
+        toolLayout.setVisibility(View.INVISIBLE);
+    }
+
+    private void showToolLayout(){
+        if (toolLayout.getVisibility()==View.INVISIBLE){
+            toolLayout.setVisibility(View.VISIBLE);
+        }else{
+            toolLayout.setVisibility(View.INVISIBLE);
+        }
+
+    }
+
     private void capture(){
         Camera.Parameters parameters = mCamera.getParameters();
         parameters.setPictureFormat(ImageFormat.JPEG);
-        parameters.setPreviewSize(800,480);
+        parameters.setPreviewSize(800,350);
         parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
         mCamera.autoFocus(new Camera.AutoFocusCallback() {
             @Override
@@ -261,23 +325,27 @@ public class CameraActivity extends Activity implements View.OnClickListener,Sur
                 && supportedModes.contains(Camera.Parameters.FLASH_MODE_ON)) {// 关闭状态
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
             mCamera.setParameters(parameters);
-//            flashBtn.setImageResource(R.drawable.camera_flash_on);
+            bt_flash.setImageResource(R.drawable.button_flash_on);
         } else if (Camera.Parameters.FLASH_MODE_ON.equals(flashMode)) {// 开启状态
             if (supportedModes.contains(Camera.Parameters.FLASH_MODE_AUTO)) {
                 parameters.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
 //                flashBtn.setImageResource(R.drawable.camera_flash_auto);
                 mCamera.setParameters(parameters);
+                bt_flash.setImageResource(R.drawable.button_flash_auto);
             } else if (supportedModes
                     .contains(Camera.Parameters.FLASH_MODE_OFF)) {
                 parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
 //                flashBtn.setImageResource(R.drawable.camera_flash_off);
                 mCamera.setParameters(parameters);
+                bt_flash.setImageResource(R.drawable.button_flash_off);
             }
+            bt_flash.setImageResource(R.drawable.button_flash_auto);
         } else if (Camera.Parameters.FLASH_MODE_AUTO.equals(flashMode)
                 && supportedModes.contains(Camera.Parameters.FLASH_MODE_OFF)) {
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
             mCamera.setParameters(parameters);
 //            flashBtn.setImageResource(R.drawable.camera_flash_off);
+            bt_flash.setImageResource(R.drawable.button_flash_off);
         }
     }
 
