@@ -61,41 +61,6 @@ public class ShareItemAdapter extends BaseAdapter {
     private Context context;
     static private Set<String> isFollow;
 
-    public class DownloadImagesTask extends AsyncTask<Object, Void, Bitmap> {
-
-        ImageView imageView = null;
-
-        @Override
-        protected Bitmap doInBackground(Object... objects) {
-            this.imageView = (ImageView) objects[0];
-            String url = (String) objects[1];
-            return download_Image(url);
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap result) {
-            imageView.setImageBitmap(result);
-        }
-
-
-        private Bitmap download_Image(String url) {
-            Bitmap bm = null;
-            try {
-                URL aURL = new URL(url);
-                URLConnection conn = aURL.openConnection();
-                conn.connect();
-                InputStream is = conn.getInputStream();
-                BufferedInputStream bis = new BufferedInputStream(is);
-                bm = BitmapFactory.decodeStream(bis);
-                bis.close();
-                is.close();
-            } catch (IOException e) {
-                Log.e("Hub","Error getting the image from server : " + e.getMessage().toString());
-            }
-            return bm;
-        }
-    }
-
     public ShareItemAdapter(Context context,List<Map<String,Object>> data) {
         // TODO Auto-generated constructor stub
         this.mInflater=LayoutInflater.from(context);  //这里就是确定你listview在哪一个layout里面展示
@@ -107,6 +72,11 @@ public class ShareItemAdapter extends BaseAdapter {
                 this.isFollow.add((String)data.get(i).get("user_id"));
             }
         }
+    }
+
+    public void setData(List<Map<String,Object>> data){
+        this.data = data;
+        notifyDataSetChanged();
     }
 
     @Override

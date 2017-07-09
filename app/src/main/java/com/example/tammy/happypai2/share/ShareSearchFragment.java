@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,12 +41,14 @@ import java.util.concurrent.TimeUnit;
  * Created by tammy on 17/6/5.
  */
 
-public class ShareSearchFragment extends Fragment {
+public class ShareSearchFragment extends Fragment implements View.OnClickListener {
     private ViewPager mViewPaper;
     private List<ImageView> images;
     private List<View> dots;
     private int currentItem;
     private ShareItemAdapter mAdapter;
+    private Button mSearchBtn;
+    private EditText mSearchBar;
     //记录上一次点的位置
     private int oldPosition = 0;
     //存放图片的id
@@ -86,6 +90,10 @@ public class ShareSearchFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         mViewPaper = (ViewPager)getView().findViewById(R.id.vp);
+        mSearchBtn = (Button)getView().findViewById(R.id.search_btn);
+        mSearchBar = (EditText)getView().findViewById(R.id.edittext);
+        mSearchBtn.setOnClickListener(this);
+        mAdapter = null;
 
         //显示的图片
         images = new ArrayList<ImageView>();
@@ -133,7 +141,19 @@ public class ShareSearchFragment extends Fragment {
         });
 
         lv=(NoScrollListView) getView().findViewById(R.id.share_search_lv);
-        getdata();
+        getdata("fetch_share", "");
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.search_btn:
+                Log.v("button_test",mSearchBar.getText().toString());
+                getdata("search", mSearchBar.getText().toString());
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -241,14 +261,17 @@ public class ShareSearchFragment extends Fragment {
      * 获得数据
      * @return
      */
-    private void getdata()
+    private void getdata(String action, String search_kw)
     {
         SharedPreferences sharedPreferences2 = getContext()
                 .getSharedPreferences("user", Context.MODE_PRIVATE);
         String user_id = sharedPreferences2.getString("user_id", "null");
 
         Map<String, Object> params = new HashMap<>();//构造请求的参数
-        params.put("action", "fetch_share");
+        params.put("action", action);
+        if(search_kw != null && search_kw.length() > 0){
+            params.put("search_kw", search_kw);
+        }
         params.put("user_id",user_id);
         params.put("post_num", 10);
 
@@ -279,10 +302,14 @@ public class ShareSearchFragment extends Fragment {
                                 map.put("count_thumb","123");
                                 list.add(map);
                             }
-
-                            ShareItemAdapter adapter=new ShareItemAdapter(getContext(),list);
-                            lv.setAdapter(adapter);
-                            mAdapter = adapter;
+                            if(mAdapter == null) {
+                                ShareItemAdapter adapter = new ShareItemAdapter(getContext(), list);
+                                lv.setAdapter(adapter);
+                                mAdapter = adapter;
+                            }
+                            else{
+                                mAdapter.setData(list);
+                            }
                         }else{
 
                         }
