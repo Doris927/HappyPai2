@@ -1,6 +1,7 @@
 package com.example.tammy.happypai2.share;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -148,8 +149,9 @@ public class ShareSearchFragment extends Fragment implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.search_btn:
-                Log.v("button_test",mSearchBar.getText().toString());
-                getdata("search", mSearchBar.getText().toString());
+                Intent intent = new Intent(getContext(), SearchResultActivity.class);
+                intent.putExtra("search_kw", mSearchBar.getText().toString());
+                startActivity(intent);
                 break;
             default:
                 break;

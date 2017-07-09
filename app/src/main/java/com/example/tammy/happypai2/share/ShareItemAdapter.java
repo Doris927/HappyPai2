@@ -264,7 +264,6 @@ public class ShareItemAdapter extends BaseAdapter {
         holder.tv_count_comment.setText((String)data.get(position).get("count_comment"));
         holder.tv_count_thumb.setText((String)data.get(position).get("count_thumb"));
 
-
         return convertView;
     }
 
