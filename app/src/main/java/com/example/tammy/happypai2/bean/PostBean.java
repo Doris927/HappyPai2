@@ -62,6 +62,15 @@ public class PostBean {
         private String time_stamp;
         private Object followee_id;
         private String picture;
+        private String comment_num;
+
+        public String getComment_num() {
+            return comment_num;
+        }
+
+        public void setComment_num(String comment_num) {
+            this.comment_num = comment_num;
+        }
 
         public String getContent() {
             return content;

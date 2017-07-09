@@ -87,7 +87,12 @@ public class ShareHomeFragment extends Fragment {
                                                         map.put("place",posts.get(i).getLocation());
                                                         map.put("img_compose",R.drawable.button_effect_a);
                                                         map.put("count_share","123");
-                                                        map.put("count_comment","123");
+                                                        if(posts.get(i).getComment_num() != null){
+                                                                map.put("count_comment",posts.get(i).getComment_num());
+                                                        }
+                                                        else{
+                                                                map.put("count_comment","0");
+                                                        }
                                                         map.put("count_thumb","123");
                                                         map.put("state_id", posts.get(i).getState_id());
                                                         list.add(map);
