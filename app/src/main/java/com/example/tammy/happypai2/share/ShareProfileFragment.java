@@ -51,12 +51,13 @@ public class ShareProfileFragment extends Fragment {
             map.put("time","2017/06/10 12:00");
             map.put("hasfollow",false);
             map.put("content", "contentcontentcontentcontentcontentcontent");
-            map.put("img_content",R.drawable.advertise_img4);
+            map.put("img_content","596078d034b95");
             map.put("place","立命館大学");
             map.put("img_compose",R.drawable.button_effect_a);
             map.put("count_share","123");
             map.put("count_comment","123");
             map.put("count_thumb","123");
+            map.put("composition","0");
             list.add(map);
         }
         return list;
