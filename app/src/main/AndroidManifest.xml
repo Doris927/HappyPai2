@@ -80,7 +80,9 @@
 
         <activity android:name=".effect.EffectFilterActivity" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
-        <activity android:name=".HelpActivity"></activity>
+        <activity android:name=".HelpActivity" />
+        <activity android:name=".Send_messagActivity" />
+        <activity android:name=".About_usActivity"></activity>
     </application>
 
 </manifest>
