@@ -2,6 +2,7 @@ package com.example.tammy.happypai2.share;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +54,7 @@ class ViewHolder
     public TextView tv_count_share;
     public TextView tv_count_comment;
     public TextView tv_count_thumb;
+    public LinearLayout comment_layout;
 }
 
 
@@ -113,6 +116,7 @@ public class ShareItemAdapter extends BaseAdapter {
             holder.tv_count_share = (TextView)convertView.findViewById(R.id.item_share_count);
             holder.tv_count_comment = (TextView)convertView.findViewById(R.id.item_comment_count);
             holder.tv_count_thumb  = (TextView)convertView.findViewById(R.id.item_thumb_count);
+            holder.comment_layout = (LinearLayout)convertView.findViewById(R.id.comment_layout);
             convertView.setTag(holder);
         }
         else{
@@ -165,6 +169,16 @@ public class ShareItemAdapter extends BaseAdapter {
             holder.bt_follow.setText("Follow");
             holder.bt_follow.setTag(1);
         }
+
+        holder.comment_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, CommentActivity.class);
+                intent.putExtra("state_id", (String)data.get(position).get("state_id"));
+                context.startActivity(intent);
+            }
+        });
+
 
         holder.bt_follow.setOnClickListener(new View.OnClickListener(){
             private Button followBtn;

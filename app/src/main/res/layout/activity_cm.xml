@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg"
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="192dp"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#707070"
+            android:text="CM"
+            android:textAlignment="center"
+            android:textColor="@color/light_bg"
+            android:textSize="30sp" />
+
+
+        <LinearLayout
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+
+            <LinearLayout
+                android:id="@+id/logo_heart"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="177dp"
+                    android:layout_height="91dp"
+                    android:layout_marginLeft="90dp"
+                    android:src="@drawable/titile_heart" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="140dp"
+                    android:text="HappyPai 1.0" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cm"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:layout_weight="0.16"
+        android:paddingTop="30dp"/>
+
+    <Button
+        android:id="@+id/cm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="cm"
+        android:paddingTop="30dp"
+        android:text=" contact us" />
+</LinearLayout>
