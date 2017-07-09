@@ -88,8 +88,9 @@
         <activity android:name=".HelpActivity" />
         <activity
             android:name=".share.CommentActivity"
-            android:label="@string/title_activity_comment"></activity>
-        <activity android:name=".share.CommentEditActivity"></activity>
+            android:label="@string/title_activity_comment" />
+        <activity android:name=".share.CommentEditActivity" />
+        <activity android:name=".share.SearchResultActivity"></activity>
     </application>
 
 </manifest>
