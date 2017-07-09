@@ -222,7 +222,7 @@ public class AlbumActivity extends AppCompatActivity {
 
             //重置状态
             viewHolder.mImg.setImageResource(R.drawable.home_icon_ask);
-            viewHolder.mSelect.setImageResource(R.drawable.check_a);
+//            viewHolder.mSelect.setImageResource(R.drawable.check_a);
 
             Log.v("img file",mDirPath+"/"+mImgsPath.get(position));
             ImageLoader.getInstance(3, ImageLoader.Type.LIFO)

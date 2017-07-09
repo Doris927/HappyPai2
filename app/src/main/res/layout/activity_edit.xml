@@ -10,6 +10,7 @@
     <ImageView
         android:id="@+id/iv_crop"
         android:scaleType="fitCenter"
+        android:layout_above="@id/bottomBtLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
@@ -43,7 +44,7 @@
             <ImageButton
                 android:id="@+id/bt_crop"
                 android:scaleType="fitCenter"
-                android:src="@drawable/button_edit_cut"
+                android:src="@drawable/selector_button_crop"
                 android:background="@android:color/transparent"
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
@@ -52,7 +53,7 @@
             <ImageButton
                 android:id="@+id/bt_rotate"
                 android:scaleType="fitCenter"
-                android:src="@drawable/button_edit_rotate"
+                android:src="@drawable/selector_button_rotate"
                 android:background="@android:color/transparent"
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
@@ -66,8 +67,7 @@
             android:layout_width="@dimen/button_size"
             android:layout_height="@dimen/button_size"
             android:layout_alignParentRight="true"
-            android:background="@drawable/selector_btn_click_sure"
-            android:src="@drawable/button_sure"/>
+            android:background="@drawable/selector_btn_click_sure" />
 
     </RelativeLayout>
 
